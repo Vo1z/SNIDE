@@ -1,0 +1,33 @@
+.root
+{
+    -fx-background-color: wheat;
+    -fx-spacing: 20px;
+}
+
+VBox
+{
+    -fx-alignment: center;
+}
+
+.button
+{
+    -fx-alignment: center;
+    -fx-background-radius: 0,0;
+    -fx-background-color: #707070;
+    -fx-pref-height: 10px;
+    -fx-pref-width: 150px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 18pt;
+}
+
+.button:pressed
+{
+    -fx-background-radius: 0,0;
+    -fx-background-color: coral;
+    -fx-pref-height: 10px;
+    -fx-pref-width: 150px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 18pt;
+}
