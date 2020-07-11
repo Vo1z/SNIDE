@@ -13,6 +13,7 @@ import java.io.IOException;
 public class LaunchWindow
 {
     private MainController mainController;
+
     private Pane root;
     private Scene launchScene;
 
@@ -42,6 +43,7 @@ public class LaunchWindow
         createButton.setOnAction(
                 event ->
                 {
+                    //Opens IdeWindow
                     this.mainController.getMainStage().setScene(mainController.getIdeWindow().getConfiguredEditorScene());
                     this.mainController.getMainStage().hide();
                     this.mainController.getMainStage().show();

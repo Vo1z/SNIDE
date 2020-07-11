@@ -1,6 +1,7 @@
 package MainController;
 
 import ApplicationWindow.IdeWindow;
+import ApplicationWindow.TextEditorArea;
 import LaunchWindow.LaunchWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -20,6 +21,7 @@ public class MainController extends Application
     public void init() throws Exception
     {
         System.out.println("On init"); //fixme debug
+        TextEditorArea textEditorArea = new TextEditorArea();
     }
 
     @Override
@@ -31,8 +33,7 @@ public class MainController extends Application
         this.ideWindow = new IdeWindow(this);
         this.launchWindow = new LaunchWindow(this);
 
-
-        this.mainStage.setScene(launchWindow.getLaunchScene());
+        this.mainStage.setScene(launchWindow.getConfiguredLaunchScene());
         this.mainStage.setTitle("SNIDE");
         this.mainStage.show();
     }
@@ -54,7 +55,7 @@ public class MainController extends Application
         return this.ideWindow;
     }
 
-    public LaunchWindow getLaunchScene()
+    public LaunchWindow getLaunchWindow()
     {
         return this.launchWindow;
     }

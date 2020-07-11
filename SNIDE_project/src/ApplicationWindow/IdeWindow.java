@@ -22,7 +22,8 @@ public class IdeWindow
         this.mainController = mainController;
 
         this.root = createRootPane();
-        this.editorScene = new Scene(root);
+        this.editorScene = new Scene(root); //TODO change to root
+
         //Scene configuration
         this.mainController.getMainStage().setResizable(true);
         this.mainController.getMainStage().setHeight(Consts.DEFAULT_WINDOW_HEIGHT);
@@ -31,11 +32,13 @@ public class IdeWindow
 
     private Pane createRootPane()
     {
-        StackPane stackPane = new StackPane();
-        textEditorArea = new TextEditorArea();
-        stackPane.getChildren().add(textEditorArea);
+        //Assign
+        StackPane createdRoot = new StackPane();
+        this.textEditorArea = new TextEditorArea();
 
-        return stackPane;//fixme
+        createdRoot.getChildren().add(textEditorArea);
+
+        return createdRoot;
     }
 
     //Getters

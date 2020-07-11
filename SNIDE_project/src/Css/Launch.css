@@ -13,7 +13,7 @@ VBox
 {
     -fx-alignment: center;
     -fx-background-radius: 0,0;
-    -fx-background-color: #707070;
+    -fx-background-color: darkgray;
     -fx-pref-height: 10px;
     -fx-pref-width: 150px;
 
@@ -25,6 +25,17 @@ VBox
 {
     -fx-background-radius: 0,0;
     -fx-background-color: coral;
+    -fx-pref-height: 10px;
+    -fx-pref-width: 150px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 18pt;
+}
+
+.button:hover
+{
+    -fx-background-radius: 0,0;
+    -fx-background-color: lightgray;
     -fx-pref-height: 10px;
     -fx-pref-width: 150px;
 
