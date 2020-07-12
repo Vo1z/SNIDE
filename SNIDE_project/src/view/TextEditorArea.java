@@ -1,11 +1,9 @@
-package ApplicationWindow;
+package view;
 
-import Back.Position;
-import Back.Utils;
-import Constants.Consts;
+import model.Position;
+import autilities.Utils;
+import model.Consts;
 import javafx.scene.control.TextArea;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;

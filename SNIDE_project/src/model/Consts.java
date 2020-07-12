@@ -1,4 +1,4 @@
-package Constants;
+package model;
 
 import javafx.stage.Screen;
 

@@ -1,4 +1,4 @@
-package Back;
+package model;
 
 public class Position
 {

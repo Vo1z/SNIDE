@@ -1,16 +1,20 @@
-package MainController;
+package controller;
 
-import ApplicationWindow.IdeWindow;
-import ApplicationWindow.TextEditorArea;
-import LaunchWindow.LaunchWindow;
+import view.IdeWindow;
+import view.TextEditorArea;
+import model.Consts;
+import view.LaunchWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class MainController extends Application
 {
-    private Stage mainStage;
     private IdeWindow ideWindow;
     private LaunchWindow launchWindow;
+
+    private Stage mainStage;
 
     public static void main(String[] args)
     {
@@ -42,6 +46,26 @@ public class MainController extends Application
     public void stop() throws Exception
     {
         System.out.println("On stop"); //fixme debug
+    }
+
+    //Launch window
+    public void openIdeWindow()
+    {
+        this.mainStage.setScene(ideWindow.getConfiguredEditorScene());
+        this.mainStage.hide();
+        this.mainStage.show();
+    }
+
+    public void openGitHubInBrowser()
+    {
+        try
+        {
+            new ProcessBuilder("x-www-browser", Consts.GitHub_URL).start();
+        }
+        catch (IOException ioException)
+        {
+            ioException.printStackTrace();
+        }
     }
 
     //Getters
