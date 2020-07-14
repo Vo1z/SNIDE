@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.stage.StageStyle;
 import view.EditorWindow;
 import autilities.Consts;
 import view.LaunchWindow;
@@ -37,6 +38,7 @@ public class MainController extends Application
 
         this.mainStage.setScene(launchWindow.getConfiguredLaunchScene());
         this.mainStage.setTitle("SNIDE");
+//        this.mainStage.initStyle(StageStyle.UNDECORATED);
         this.mainStage.show();
     }
 

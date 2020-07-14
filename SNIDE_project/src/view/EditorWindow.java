@@ -8,10 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+
+import java.util.regex.Pattern;
 
 public class EditorWindow
 {
@@ -33,7 +32,7 @@ public class EditorWindow
 
     private Pane createRootPane()
     {
-        HBox root = new HBox();
+        HBox root = new HBox(10);
 
         //Configuration of root
         root.getStylesheets().add(Themes.IDE_WINDOW_THEME_1);
@@ -75,15 +74,17 @@ public class EditorWindow
         return topPanelPane;
     }
 
-    private TabPane createTextEditorPanel()
+    private Pane createTextEditorPanel()
     {
+        StackPane stackPane = new StackPane();
         TabPane tabPane = new TabPane();
 
-        Tab tab = new Tab("firstTab", new TextArea());
+        Tab tab = new Tab("FirstTab", new TextArea());
 
         tabPane.getTabs().add(tab);
+        stackPane.getChildren().add(tabPane);
 
-        return tabPane;
+        return stackPane;
     }
 
     //Getters

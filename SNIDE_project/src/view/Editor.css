@@ -1,20 +1,74 @@
-\\Debug version
+.tab-header-background
+{
+    -fx-background-color: wheat;
+}
+
+.tab-header-area
+{
+    -fx-padding: 0 0 0 -5;
+}
+
+.tab
+{
+    -fx-background-radius: 0,0;
+    -fx-padding: 0 5 0 10;
+    -fx-font-size: 12pt;
+    -fx-background-color: darkgray;
+}
+
+.tab-pane
+{
+    -fx-padding: 0 -1 -1 -1;
+}
+
 .root
 {
     -fx-spacing: 5px;
+    -fx-pref-height: 10000px;
+    -fx-pref-width: 10000px;
+
+    -fx-background-color: wheat;
+}
+.text-area
+{
+    -fx-pref-width: 1000000px;
+    -fx-pref-height: 100000000px;
+
+    -fx-control-inner-background: #e2d1b9;
+    -fx-border-color: gray;
+    -fx-border-width: 2px;
+
+    -fx-effect: null;
+}
+
+.text-area:hover
+{
+    -fx-pref-width: 1000000px;
+    -fx-pref-height: 100000000px;
+
+    -fx-control-inner-background: #e2d1b9;
+    -fx-border-color: gray;
+    -fx-border-width: 2px;
+
+    -fx-effect: null;
+}
+
+.text-area:focused
+{
+    -fx-pref-width: 1000000px;
+    -fx-pref-height: 100000000px;
+
+    -fx-control-inner-background: #e2d1b9;
+    -fx-border-color: gray;
+    -fx-border-width: 2px;
+
+    -fx-effect: null;
 }
 
 VBox
 {
-    -fx-padding: 20px;
     -fx-spacing: 5px;
-    -fx-min-width: 150px;
-}
-
-TextArea
-{
-    -fx-pref-width: 10000px;
-    -fx-spacing: 50px;
+    -fx-padding: 5px;
 }
 
 .button
@@ -23,8 +77,8 @@ TextArea
 
     -fx-background-radius: 99,0;
     -fx-background-color: darkgray;
-    -fx-pref-height: 20px;
-    -fx-pref-width: 80px;
+    -fx-min-height: 20px;
+    -fx-min-width: 80px;
 
     -fx-font-family: Cuprum;
     -fx-font-size: 12pt;
@@ -34,8 +88,8 @@ TextArea
 {
     -fx-background-radius: 99,0;
     -fx-background-color: coral;
-    -fx-pref-height: 20px;
-    -fx-pref-width: 80px;
+    -fx-min-height: 20px;
+    -fx-min-width: 80px;
 
     -fx-font-family: Cuprum;
     -fx-font-size: 12pt;
@@ -45,8 +99,8 @@ TextArea
 {
     -fx-background-radius: 99,0;
     -fx-background-color: lightgray;
-    -fx-pref-height: 20px;
-    -fx-pref-width: 80px;
+    -fx-min-height: 20px;
+    -fx-min-width: 80px;
 
     -fx-font-family: Cuprum;
     -fx-font-size: 12pt;
