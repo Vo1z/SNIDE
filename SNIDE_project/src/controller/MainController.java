@@ -1,8 +1,7 @@
 package controller;
 
-import view.IdeWindow;
-import view.TextEditorArea;
-import model.Consts;
+import view.EditorWindow;
+import autilities.Consts;
 import view.LaunchWindow;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -11,7 +10,7 @@ import java.io.IOException;
 
 public class MainController extends Application
 {
-    private IdeWindow ideWindow;
+    private EditorWindow editorWindow;
     private LaunchWindow launchWindow;
 
     private Stage mainStage;
@@ -25,7 +24,6 @@ public class MainController extends Application
     public void init() throws Exception
     {
         System.out.println("On init"); //fixme debug
-        TextEditorArea textEditorArea = new TextEditorArea();
     }
 
     @Override
@@ -34,7 +32,7 @@ public class MainController extends Application
         System.out.println("On start"); //fixme debug
 
         this.mainStage = stage;
-        this.ideWindow = new IdeWindow(this);
+        this.editorWindow = new EditorWindow(this);
         this.launchWindow = new LaunchWindow(this);
 
         this.mainStage.setScene(launchWindow.getConfiguredLaunchScene());
@@ -48,10 +46,18 @@ public class MainController extends Application
         System.out.println("On stop"); //fixme debug
     }
 
+    //Ide Window
+    public void openLaunchWindow()
+    {
+        this.mainStage.setScene(launchWindow.getConfiguredLaunchScene());
+        this.mainStage.hide();
+        this.mainStage.show();
+    }
+
     //Launch window
     public void openIdeWindow()
     {
-        this.mainStage.setScene(ideWindow.getConfiguredEditorScene());
+        this.mainStage.setScene(editorWindow.getConfiguredEditorScene());
         this.mainStage.hide();
         this.mainStage.show();
     }
@@ -74,9 +80,9 @@ public class MainController extends Application
         return this.mainStage;
     }
 
-    public IdeWindow getIdeWindow()
+    public EditorWindow getEditorWindow()
     {
-        return this.ideWindow;
+        return this.editorWindow;
     }
 
     public LaunchWindow getLaunchWindow()

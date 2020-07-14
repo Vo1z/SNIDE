@@ -1,6 +1,6 @@
 package view;
 
-import model.Themes;
+import autilities.Themes;
 import controller.MainController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

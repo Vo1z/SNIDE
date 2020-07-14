@@ -1,0 +1,53 @@
+\\Debug version
+.root
+{
+    -fx-spacing: 5px;
+}
+
+VBox
+{
+    -fx-padding: 20px;
+    -fx-spacing: 5px;
+    -fx-min-width: 150px;
+}
+
+TextArea
+{
+    -fx-pref-width: 10000px;
+    -fx-spacing: 50px;
+}
+
+.button
+{
+    -fx-alignment: center;
+
+    -fx-background-radius: 99,0;
+    -fx-background-color: darkgray;
+    -fx-pref-height: 20px;
+    -fx-pref-width: 80px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 12pt;
+}
+
+.button:pressed
+{
+    -fx-background-radius: 99,0;
+    -fx-background-color: coral;
+    -fx-pref-height: 20px;
+    -fx-pref-width: 80px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 12pt;
+}
+
+.button:hover
+{
+    -fx-background-radius: 99,0;
+    -fx-background-color: lightgray;
+    -fx-pref-height: 20px;
+    -fx-pref-width: 80px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 12pt;
+}

@@ -1,4 +1,4 @@
-package model;
+package autilities;
 
 import javafx.stage.Screen;
 
