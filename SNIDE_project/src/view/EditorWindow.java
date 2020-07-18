@@ -1,6 +1,5 @@
 package view;
 
-import autilities.Consts;
 import autilities.Themes;
 import controller.MainController;
 import javafx.scene.Scene;
@@ -8,18 +7,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.*;
-
-import java.util.regex.Pattern;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 public class EditorWindow
 {
     private MainController mainController;
 
+    //Scene elements
     private Scene editorScene;
     private Pane root;
-
-    //Scene elements
 
     public EditorWindow(MainController mainController)
     {
@@ -60,7 +59,7 @@ public class EditorWindow
 
         loadButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
 
-        settingsButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
+        settingsButton.setOnAction(e -> this.mainController.openSettingsWindow());
 
         exitButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
 
@@ -95,10 +94,6 @@ public class EditorWindow
 
     public Scene getConfiguredEditorScene()
     {
-        this.mainController.getMainStage().setResizable(true);
-        this.mainController.getMainStage().setHeight(Consts.DEFAULT_WINDOW_HEIGHT);
-        this.mainController.getMainStage().setWidth(Consts.DEFAULT_WINDOW_WIDTH);
-
         return editorScene;
     }
 }

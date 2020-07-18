@@ -37,11 +37,11 @@ public class LaunchWindow
         Button gitHubButton = new Button("GitHub");
 
         //Buttons configuration
-        createButton.setOnAction(event -> this.mainController.openIdeWindow());
+        createButton.setOnAction(event -> this.mainController.openEditorWindow());
 
         openButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
 
-        settingsButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
+        settingsButton.setOnAction(e -> this.mainController.openSettingsWindow());
 
         gitHubButton.setOnAction(event -> this.mainController.openGitHubInBrowser());
 
@@ -62,10 +62,6 @@ public class LaunchWindow
 
     public Scene getConfiguredLaunchScene()
     {
-        this.mainController.getMainStage().setResizable(false);
-        this.mainController.getMainStage().setWidth(400);
-        this.mainController.getMainStage().setHeight(600);
-
         return this.launchScene;
     }
 }
