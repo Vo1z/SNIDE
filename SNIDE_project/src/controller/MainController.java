@@ -2,19 +2,27 @@ package controller;
 
 import autilities.Consts;
 import autilities.ElementsTicker;
+import autilities.Utils;
 import autilities.WindowType;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
+import model.EditorModel;
 import view.EditorWindow;
 import view.LaunchWindow;
 import view.SettingsWindow;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
 
 public class MainController extends Application
 {
     private EditorWindow editorWindow;
+    private EditorModel editorModel;
     private LaunchWindow launchWindow;
     private SettingsWindow settingsWindow;
 
@@ -39,9 +47,11 @@ public class MainController extends Application
 
         this.mainStage = stage;
         this.editorWindow = new EditorWindow(this);
+        this.editorModel = new EditorModel(this);
         this.launchWindow = new LaunchWindow(this);
         this.settingsWindow = new SettingsWindow(this);
-        this.windowHist = new ElementsTicker<WindowType>(WindowType.values().length);
+        this.windowHist = new ElementsTicker<>(WindowType.values().length);
+
 
         this.mainStage.setTitle("SNIDE");
         this.openLaunchWindow();
@@ -113,6 +123,31 @@ public class MainController extends Application
         return this.mainStage.getScene();
     }
 
+    public void openFileChooserAndAddChosenFilesToEditor()
+    {
+        List<File> chosenFiles = Utils.getFilesFromFileChooser(this.mainStage);
+
+        //Adding tabs to model
+        for (var file : chosenFiles)
+        {
+            this.editorModel.addFile(file);
+        }
+
+        //Adding tabs to view
+        for (var fileKey : this.editorModel.getOpenedFiles().keySet())
+        {
+            this.editorWindow.addTab(fileKey, this.editorModel.getOpenedFiles().get(fileKey));
+        }
+    }
+
+    public void closeTab(int fromIndex, int toIndex)
+    {
+        System.err.println("Closing tap from controller");
+
+        this.editorWindow.getTabPanel().getTabs().remove(fromIndex, toIndex);
+        this.editorModel.removeFile(fromIndex, toIndex);
+    }
+
     //Getters
     public Stage getMainStage()
     {
@@ -121,11 +156,25 @@ public class MainController extends Application
 
     public Object getPreviousWindowType()
     {
-        return windowHist.getElements()[windowHist.getElements().length - 2];
+        if (this.windowHist.getElements().length >= 2)
+        {
+            return windowHist.getElements()[windowHist.getElements().length - 2];
+        }
+        else
+        {
+            return null;
+        }
     }
 
     public Object getCurrentWindowType()
     {
-        return windowHist.getElements()[windowHist.getElements().length - 1];
+        if (this.windowHist.getElements().length >= 1)
+        {
+            return windowHist.getElements()[windowHist.getElements().length - 1];
+        }
+        else
+        {
+            return  null;
+        }
     }
 }

@@ -12,6 +12,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
+
 public class EditorWindow
 {
     private MainController mainController;
@@ -19,6 +21,7 @@ public class EditorWindow
     //Scene elements
     private Scene editorScene;
     private Pane root;
+    private TabPane tabPanel;
 
     public EditorWindow(MainController mainController)
     {
@@ -57,7 +60,7 @@ public class EditorWindow
 
         saveButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
 
-        loadButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
+        loadButton.setOnAction(e -> mainController.openFileChooserAndAddChosenFilesToEditor()); //TODO
 
         settingsButton.setOnAction(e -> this.mainController.openSettingsWindow());
 
@@ -76,14 +79,21 @@ public class EditorWindow
     private Pane createTextEditorPanel()
     {
         StackPane stackPane = new StackPane();
-        TabPane tabPane = new TabPane();
+        tabPanel = new TabPane();
 
-        Tab tab = new Tab("FirstTab", new TextArea());
-
-        tabPane.getTabs().add(tab);
-        stackPane.getChildren().add(tabPane);
+        stackPane.getChildren().add(tabPanel);
 
         return stackPane;
+    }
+
+    public void addTab(File file, String content)
+    {
+        Tab tab = new Tab(file.getName(), new TextArea(content));
+
+        this.tabPanel.getTabs().add(tab);
+
+        int tabIndex = this.tabPanel.getTabs().indexOf(tab);
+        tab.setOnClosed(e -> this.mainController.closeTab(tabIndex, tabIndex));
     }
 
     //Getters
@@ -95,5 +105,10 @@ public class EditorWindow
     public Scene getConfiguredEditorScene()
     {
         return editorScene;
+    }
+
+    public TabPane getTabPanel()
+    {
+        return tabPanel;
     }
 }

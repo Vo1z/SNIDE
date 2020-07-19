@@ -39,7 +39,11 @@ public class LaunchWindow
         //Buttons configuration
         createButton.setOnAction(event -> this.mainController.openEditorWindow());
 
-        openButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
+        openButton.setOnAction(e ->
+        {
+            this.mainController.openFileChooserAndAddChosenFilesToEditor();
+            this.mainController.openEditorWindow();
+        }); //TODO
 
         settingsButton.setOnAction(e -> this.mainController.openSettingsWindow());
 

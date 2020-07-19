@@ -1,9 +1,14 @@
 package autilities;
 
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,5 +42,13 @@ public class Utils
         }
 
         return words;
+    }
+
+    public static List<File> getFilesFromFileChooser(Stage stage)
+    {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select files to open");
+
+        return fileChooser.showOpenMultipleDialog(stage);
     }
 }
