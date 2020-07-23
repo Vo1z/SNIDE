@@ -1,6 +1,7 @@
 package view;
 
 import autilities.Themes;
+import controller.EditorController;
 import controller.MainController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,18 +17,17 @@ import java.io.File;
 
 public class EditorWindow
 {
-    private MainController mainController;
+    private EditorController editorController;
 
     //Scene elements
     private Scene editorScene;
     private Pane root;
     private TabPane tabPanel;
 
-    public EditorWindow(MainController mainController)
+    public EditorWindow(EditorController editorController)
     {
         //Assign
-        this.mainController = mainController;
-
+        this.editorController = editorController;
         this.root = createRootPane();
         this.editorScene = new Scene(root);
     }
@@ -60,9 +60,9 @@ public class EditorWindow
 
         saveButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
 
-        loadButton.setOnAction(e -> mainController.openFileChooserAndAddChosenFilesToEditor()); //TODO
+        loadButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
 
-        settingsButton.setOnAction(e -> this.mainController.openSettingsWindow());
+        settingsButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
 
         exitButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
 
@@ -90,10 +90,16 @@ public class EditorWindow
     {
         Tab tab = new Tab(file.getName(), new TextArea(content));
 
+        tab.setOnClosed(e -> this.editorController.removeFileFromEditor(this.tabPanel.getSelectionModel().getSelectedIndex()));
         this.tabPanel.getTabs().add(tab);
 
-        int tabIndex = this.tabPanel.getTabs().indexOf(tab);
-        tab.setOnClosed(e -> this.mainController.closeTab(tabIndex, tabIndex));
+        System.err.println("Tab was added under index " + this.tabPanel.getTabs().indexOf(tab));//fixme debug
+    }
+
+    public void removeTab(int index)
+    {
+        System.err.println("Tab " + tabPanel.getTabs().get(index).getId() + " was removed from the EditorWindow");
+        this.tabPanel.getTabs().remove(index);
     }
 
     //Getters
@@ -111,4 +117,5 @@ public class EditorWindow
     {
         return tabPanel;
     }
+
 }

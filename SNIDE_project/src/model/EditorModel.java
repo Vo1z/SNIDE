@@ -1,79 +1,68 @@
 package model;
 
-import controller.MainController;
+import controller.EditorController;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class EditorModel
 {
-    private MainController mainController;
+    private EditorController editorController;
+    private ArrayList<FileModel> files;
 
-    private ArrayList<File> keys;
-    private HashMap<File, String> openedFiles;
-
-    public EditorModel(MainController mainController)
+    public EditorModel(EditorController editorController)
     {
-        this.mainController = mainController;
-
-        this.keys = new ArrayList<>();
-        this.openedFiles = new HashMap<>();
+        this.editorController = editorController;
+        this.files = new ArrayList<>();
     }
 
-    public void addFile(File file)
+    public void addFile(File inputFile)
     {
         StringBuffer fileContent = new StringBuffer();
 
         try
         {
-            FileInputStream fis = new FileInputStream(file);
-            int charIndex;
+            FileInputStream fis = new FileInputStream(inputFile);
+            int ind;
 
-            while ((charIndex = fis.read()) != -1)
+            while ((ind = fis.read()) != -1)
             {
-                fileContent.append((char)charIndex);
+                fileContent.append((char)ind);
             }
         }
         catch (FileNotFoundException e)
         {
             e.printStackTrace();
         }
-        catch (IOException ioException)
+        catch (IOException e)
         {
-            ioException.printStackTrace();
+            e.printStackTrace();
         }
 
-        this.keys.add(file);
-        this.openedFiles.put(file, fileContent.toString());
+        System.out.println("Adding " + inputFile.getName());//fixme debug
+
+        this.files.add(new FileModel(inputFile, fileContent.toString()));
     }
 
-    public void removeFile(int fromIndex, int toIndex)
+    public void removeFile(int index)
     {
-        if (fromIndex == toIndex)
-        {
-            System.err.println("Deleting file from model " + keys.get(fromIndex).getName());
+        System.err.println("File " + files.get(index) + " was removed from EditorModel");//fixme debug
 
-            this.openedFiles.remove(keys.get(fromIndex));
-        }
-        else
-        {
-            for (int i = fromIndex; i < toIndex; i++)
-            {
-                //fixme debug
-                System.err.println("Deleting file from model " + keys.get(i).getName());
-
-                this.openedFiles.remove(keys.get(i));
-            }
-        }
+        this.files.remove(index);
     }
 
     //Getters
-    public HashMap<File, String> getOpenedFiles()
+    public ArrayList<FileModel> getFiles()
     {
-        return this.openedFiles;
+        return this.files;
+    }
+
+
+    public int getNumberOfOpenedFiles()
+    {
+        return  this.files.size();
     }
 }

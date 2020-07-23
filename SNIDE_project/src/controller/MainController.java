@@ -6,8 +6,6 @@ import autilities.Utils;
 import autilities.WindowType;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import model.EditorModel;
 import view.EditorWindow;
@@ -16,13 +14,14 @@ import view.SettingsWindow;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 public class MainController extends Application
 {
     private EditorWindow editorWindow;
     private EditorModel editorModel;
+    private EditorController editorController;
+
     private LaunchWindow launchWindow;
     private SettingsWindow settingsWindow;
 
@@ -46,8 +45,14 @@ public class MainController extends Application
         System.out.println("On start"); //fixme debug
 
         this.mainStage = stage;
-        this.editorWindow = new EditorWindow(this);
-        this.editorModel = new EditorModel(this);
+
+        //Editor
+        this.editorController = new EditorController(this);
+        this.editorWindow = new EditorWindow(this.editorController);
+        this.editorModel = new EditorModel(this.editorController);
+        this.editorController.setEditorWindow(editorWindow);
+        this.editorController.setEditorModel(editorModel);
+
         this.launchWindow = new LaunchWindow(this);
         this.settingsWindow = new SettingsWindow(this);
         this.windowHist = new ElementsTicker<>(WindowType.values().length);
@@ -65,7 +70,6 @@ public class MainController extends Application
         System.out.println("On stop"); //fixme debug
     }
 
-    //Ide Window
     public void openLaunchWindow()
     {
         this.windowHist.push(WindowType.LAUNCH_WINDOW);
@@ -79,7 +83,6 @@ public class MainController extends Application
         this.mainStage.show();
     }
 
-    //Launch window
     public void openEditorWindow()
     {
         this.windowHist.push(WindowType.EDITOR_WINDOW);
@@ -118,37 +121,22 @@ public class MainController extends Application
         }
     }
 
-    public Scene getCurrentScene()
-    {
-        return this.mainStage.getScene();
-    }
-
     public void openFileChooserAndAddChosenFilesToEditor()
     {
         List<File> chosenFiles = Utils.getFilesFromFileChooser(this.mainStage);
 
-        //Adding tabs to model
-        for (var file : chosenFiles)
-        {
-            this.editorModel.addFile(file);
-        }
-
-        //Adding tabs to view
-        for (var fileKey : this.editorModel.getOpenedFiles().keySet())
-        {
-            this.editorWindow.addTab(fileKey, this.editorModel.getOpenedFiles().get(fileKey));
-        }
+        chosenFiles.stream().forEach(file -> this.editorController.addFileToEditor(file));
     }
 
-    public void closeTab(int fromIndex, int toIndex)
-    {
-        System.err.println("Closing tap from controller");
-
-        this.editorWindow.getTabPanel().getTabs().remove(fromIndex, toIndex);
-        this.editorModel.removeFile(fromIndex, toIndex);
-    }
-
+    //Editor controller
     //Getters
+
+    public Scene getCurrentScene()
+
+    {
+        return this.mainStage.getScene();
+    }
+
     public Stage getMainStage()
     {
         return this.mainStage;

@@ -59,11 +59,6 @@ public class LaunchWindow
     }
 
     //Getters
-    public Scene getLaunchScene()
-    {
-        return this.launchScene;
-    }
-
     public Scene getConfiguredLaunchScene()
     {
         return this.launchScene;
