@@ -1,5 +1,7 @@
 package autilities;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -48,7 +50,26 @@ public class Utils
     {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select files to open");
+        List<File> selectedFiles = fileChooser.showOpenMultipleDialog(stage);
 
-        return fileChooser.showOpenMultipleDialog(stage);
+        if (selectedFiles != null)
+        {
+            selectedFiles.stream()
+                    .filter(file -> !file.isDirectory());
+        }
+
+        return  selectedFiles;
+    }
+
+    public static void showAlertWindow(String alertMessage)
+    {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText(alertMessage);
+        alert.showAndWait();
+    }
+
+    public static void stopProgram()
+    {
+        Platform.exit();
     }
 }

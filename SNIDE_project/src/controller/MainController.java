@@ -75,6 +75,7 @@ public class MainController extends Application
         this.windowHist.push(WindowType.LAUNCH_WINDOW);
 
         this.mainStage.setResizable(false);
+        this.mainStage.setMaximized(false);
         this.mainStage.setWidth(400);
         this.mainStage.setHeight(600);
 
@@ -88,8 +89,9 @@ public class MainController extends Application
         this.windowHist.push(WindowType.EDITOR_WINDOW);
 
         this.mainStage.setResizable(true);
-        this.mainStage.setHeight(Consts.DEFAULT_WINDOW_HEIGHT);
-        this.mainStage.setWidth(Consts.DEFAULT_WINDOW_WIDTH);
+        //this.mainStage.setHeight(Consts.DEFAULT_WINDOW_HEIGHT);
+        //this.mainStage.setWidth(Consts.DEFAULT_WINDOW_WIDTH);
+        this.mainStage.setMaximized(true);
 
         this.mainStage.setScene(editorWindow.getConfiguredEditorScene());
         this.mainStage.hide();
@@ -101,6 +103,7 @@ public class MainController extends Application
         this.windowHist.push(WindowType.SETTINGS_WINDOW);
 
         this.mainStage.setResizable(false);
+        this.mainStage.setMaximized(false);
         this.mainStage.setWidth(400);
         this.mainStage.setHeight(600);
 
@@ -125,7 +128,15 @@ public class MainController extends Application
     {
         List<File> chosenFiles = Utils.getFilesFromFileChooser(this.mainStage);
 
-        chosenFiles.stream().forEach(file -> this.editorController.addFileToEditor(file));
+        if(chosenFiles != null)
+        {
+            chosenFiles.stream().forEach(
+                    file ->
+                    {
+                        this.editorController.addFileToEditor(file);
+                    }
+            );
+        }
     }
 
     //Editor controller

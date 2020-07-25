@@ -1,6 +1,7 @@
 package view;
 
 import autilities.Themes;
+import autilities.Utils;
 import controller.EditorController;
 import controller.MainController;
 import javafx.scene.Scene;
@@ -20,14 +21,16 @@ public class EditorWindow
     private EditorController editorController;
 
     //Scene elements
+    private TabPane tabPanel;
+
     private Scene editorScene;
     private Pane root;
-    private TabPane tabPanel;
 
     public EditorWindow(EditorController editorController)
     {
         //Assign
         this.editorController = editorController;
+        this.tabPanel = new TabPane();
         this.root = createRootPane();
         this.editorScene = new Scene(root);
     }
@@ -41,7 +44,7 @@ public class EditorWindow
 
         //Adding to root
         root.getChildren().add(createControlPanel());
-        root.getChildren().add(createTextEditorPanel());
+        root.getChildren().add(tabPanel);
 
         return root;
     }
@@ -60,11 +63,11 @@ public class EditorWindow
 
         saveButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
 
-        loadButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
+        loadButton.setOnAction(e -> this.editorController.getMainController().openFileChooserAndAddChosenFilesToEditor());
 
-        settingsButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
+        settingsButton.setOnAction(e -> this.editorController.getMainController().openSettingsWindow()); //TODO
 
-        exitButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
+        exitButton.setOnAction(e -> Utils.stopProgram());
 
         //Adding to pane
         topPanelPane.getChildren().add(addNewFileButton);
@@ -76,30 +79,31 @@ public class EditorWindow
         return topPanelPane;
     }
 
-    private Pane createTextEditorPanel()
+    public void updateTabs()
     {
-        StackPane stackPane = new StackPane();
-        tabPanel = new TabPane();
+        this.editorController.getEditorModel().getEditorTabs().stream()
+                .forEach(
+                        editorTab ->
+                        {
+                            if (!this.tabPanel.getTabs().contains(editorTab))
+                            {
+                                this.tabPanel.getTabs().add(editorTab);
+                                System.out.println("Appending file in VIEW");//fixme debug
+                            }
+                        }
+                );
 
-        stackPane.getChildren().add(tabPanel);
-
-        return stackPane;
-    }
-
-    public void addTab(File file, String content)
-    {
-        Tab tab = new Tab(file.getName(), new TextArea(content));
-
-        tab.setOnClosed(e -> this.editorController.removeFileFromEditor(this.tabPanel.getSelectionModel().getSelectedIndex()));
-        this.tabPanel.getTabs().add(tab);
-
-        System.err.println("Tab was added under index " + this.tabPanel.getTabs().indexOf(tab));//fixme debug
-    }
-
-    public void removeTab(int index)
-    {
-        System.err.println("Tab " + tabPanel.getTabs().get(index).getId() + " was removed from the EditorWindow");
-        this.tabPanel.getTabs().remove(index);
+        this.tabPanel.getTabs().stream()
+                .forEach(
+                        tab ->
+                        {
+                            if (!this.editorController.getEditorModel().getEditorTabs().contains(tab))
+                            {
+                                this.tabPanel.getTabs().remove(tab);
+                                System.err.println("Removing from VIEW");//fixme debug
+                            }
+                        }
+                );
     }
 
     //Getters

@@ -1,6 +1,7 @@
 package controller;
 
 import model.EditorModel;
+import model.EditorTab;
 import view.EditorWindow;
 
 import java.io.File;
@@ -25,14 +26,14 @@ public class EditorController
 
     public void addFileToEditor(File aFile)
     {
-        editorModel.addFile(aFile);
-        editorWindow.addTab(aFile, editorModel.getFiles().get(editorModel.getNumberOfOpenedFiles() - 1).getContent());
+        this.editorModel.addTab(new EditorTab(aFile, this));
+        this.editorWindow.updateTabs();
     }
 
-    public void removeFileFromEditor(int index)
+    public void removeFileFromEditor(EditorTab editorTab)
     {
-        this.editorWindow.removeTab(index);
-        this.editorModel.removeFile(index);
+        this.editorModel.removeTab(editorTab);
+        this.editorWindow.updateTabs();
     }
 
     //Setters
@@ -54,5 +55,10 @@ public class EditorController
     public EditorWindow getEditorWindow()
     {
         return editorWindow;
+    }
+
+    public MainController getMainController()
+    {
+        return mainController;
     }
 }

@@ -11,58 +11,38 @@ import java.util.ArrayList;
 public class EditorModel
 {
     private EditorController editorController;
-    private ArrayList<FileModel> files;
+    private ArrayList<EditorTab> editorTabs;
 
     public EditorModel(EditorController editorController)
     {
         this.editorController = editorController;
-        this.files = new ArrayList<>();
+        this.editorTabs = new ArrayList<>();
     }
 
-    public void addFile(File inputFile)
+    public void addTab(EditorTab editorTab)
     {
-        StringBuffer fileContent = new StringBuffer();
-
-        try
-        {
-            FileInputStream fis = new FileInputStream(inputFile);
-            int ind;
-
-            while ((ind = fis.read()) != -1)
-            {
-                fileContent.append((char)ind);
-            }
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        System.out.println("Adding " + inputFile.getName());//fixme debug
-
-        this.files.add(new FileModel(inputFile, fileContent.toString()));
+        this.editorTabs.add(editorTab);
     }
 
-    public void removeFile(int index)
+    public void removeTab(EditorTab editorTab)
     {
-        System.err.println("File " + files.get(index) + " was removed from EditorModel");//fixme debug
+        System.err.println("Removing from MODEL " + editorTab.getText());//fixme debug
+        this.editorTabs.remove(editorTab);
+    }
 
-        this.files.remove(index);
+    public void removeTab(int index)
+    {
+        this.editorTabs.remove(index);
     }
 
     //Getters
-    public ArrayList<FileModel> getFiles()
+    public ArrayList<EditorTab> getEditorTabs()
     {
-        return this.files;
+        return this.editorTabs;
     }
 
-
-    public int getNumberOfOpenedFiles()
+    public int getNumberOfTabs()
     {
-        return  this.files.size();
+        return this.editorTabs.size();
     }
 }
