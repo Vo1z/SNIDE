@@ -1,13 +1,11 @@
 package model;
 
+import autilities.Utils;
 import controller.EditorController;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 
 public class EditorTab extends Tab
 {
@@ -41,9 +39,9 @@ public class EditorTab extends Tab
             FileInputStream fis = new FileInputStream(file);
             int charId;
 
-            while((charId = fis.read()) != -1)
+            while ((charId = fis.read()) != -1)
             {
-                fileContentBuffer.append((char)charId);
+                fileContentBuffer.append((char) charId);
             }
         }
         catch (FileNotFoundException e)
@@ -58,19 +56,48 @@ public class EditorTab extends Tab
         return fileContentBuffer.toString();
     }
 
+    public void saveFile()
+    {
+        if (!isSaved())
+        {
+            try
+            {
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter bf = new BufferedWriter(fw);
+
+                bf.write(this.tabTextArea.getText());
+
+                Utils.printDebug(Utils.getFileInfo(file, "UPDATE"));//fixme debug
+                bf.close();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
     //Getters
-    private String getInitialFileContent()
+    public String getInitialFileContent()
     {
         return this.initialFileContent;
     }
 
-    private File getFile()
+    public File getFile()
     {
         return this.file;
     }
 
-    private String getTextAreaContent()
+    public String getTextAreaContent()
     {
         return tabTextArea.getText();
+    }
+
+    public boolean isSaved()
+    {
+        if (this.tabTextArea.getText().equals(initialFileContent))
+            return true;
+        else
+            return false;
     }
 }

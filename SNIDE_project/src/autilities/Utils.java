@@ -72,4 +72,28 @@ public class Utils
     {
         Platform.exit();
     }
+
+    public static String getFileInfo(File file, String modificationType)
+    {
+        if (modificationType == null)
+        {
+            modificationType = "[Default operation]";
+        }
+
+        StringBuilder info = new StringBuilder();
+
+        info.append("[" + modificationType + "]\n");
+        info.append("File name: " + file.getName() + "\n");
+        info.append("File path: " + file.getPath() + "\n");
+
+        return info.toString();
+    }
+
+    public static void printDebug(String message)
+    {
+        System.err.println("DEBUG LOG:");
+        System.out.println("{");
+        System.out.println("\t" + message);
+        System.out.println("}");
+    }
 }

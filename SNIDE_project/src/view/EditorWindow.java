@@ -13,6 +13,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import model.EditorTab;
 
 import java.io.File;
 
@@ -61,7 +62,7 @@ public class EditorWindow
         //Buttons configuration
         addNewFileButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
 
-        saveButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
+        saveButton.setOnAction(e -> editorController.getEditorModel().saveFile(this.tabPanel.getSelectionModel().getSelectedIndex())); //TODO
 
         loadButton.setOnAction(e -> this.editorController.getMainController().openFileChooserAndAddChosenFilesToEditor());
 
@@ -88,7 +89,7 @@ public class EditorWindow
                             if (!this.tabPanel.getTabs().contains(editorTab))
                             {
                                 this.tabPanel.getTabs().add(editorTab);
-                                System.out.println("Appending file in VIEW");//fixme debug
+                                Utils.printDebug("Adding to VIEW"); //fixme debug
                             }
                         }
                 );
@@ -100,7 +101,7 @@ public class EditorWindow
                             if (!this.editorController.getEditorModel().getEditorTabs().contains(tab))
                             {
                                 this.tabPanel.getTabs().remove(tab);
-                                System.err.println("Removing from VIEW");//fixme debug
+                                Utils.printDebug("Removing to VIEW"); //fixme debug
                             }
                         }
                 );

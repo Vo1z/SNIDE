@@ -1,11 +1,8 @@
 package model;
 
 import controller.EditorController;
+import javafx.scene.control.Tab;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class EditorModel
@@ -30,6 +27,18 @@ public class EditorModel
         this.editorTabs.remove(editorTab);
     }
 
+    public void saveFile(EditorTab editorTab)
+    {
+        if (editorTab != null)
+            editorTab.saveFile();
+    }
+
+    public void saveFile(int index)
+    {
+        if (index >= 0 && index < editorTabs.size())
+            saveFile(this.editorTabs.get(index));
+    }
+
     public void removeTab(int index)
     {
         this.editorTabs.remove(index);
@@ -44,5 +53,10 @@ public class EditorModel
     public int getNumberOfTabs()
     {
         return this.editorTabs.size();
+    }
+
+    public Tab getTab(int index)
+    {
+        return this.editorTabs.get(index);
     }
 }
