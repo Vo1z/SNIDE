@@ -3,19 +3,12 @@ package view;
 import autilities.Themes;
 import autilities.Utils;
 import controller.EditorController;
-import controller.MainController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import model.EditorTab;
-
-import java.io.File;
 
 public class EditorWindow
 {

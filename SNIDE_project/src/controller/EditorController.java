@@ -22,6 +22,8 @@ public class EditorController
     public EditorController(MainController mainController)
     {
         this.mainController = mainController;
+        this.editorWindow = new EditorWindow(this);
+        this.editorModel = new EditorModel(this);
     }
 
     public void createNewFile()
@@ -42,16 +44,6 @@ public class EditorController
         this.editorWindow.updateTabs();
     }
 
-    //Setters
-    public void setEditorWindow(EditorWindow editorWindow)
-    {
-        this.editorWindow = editorWindow;
-    }
-
-    public void setEditorModel(EditorModel editorModel)
-    {
-        this.editorModel = editorModel;
-    }
     //Getters
     public EditorModel getEditorModel()
     {

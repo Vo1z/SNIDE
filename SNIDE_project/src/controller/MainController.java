@@ -7,8 +7,6 @@ import autilities.WindowType;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.EditorModel;
-import view.EditorWindow;
 import view.LaunchWindow;
 import view.SettingsWindow;
 
@@ -18,8 +16,6 @@ import java.util.List;
 
 public class MainController extends Application
 {
-    private EditorWindow editorWindow;
-    private EditorModel editorModel;
     private EditorController editorController;
 
     private LaunchWindow launchWindow;
@@ -48,10 +44,6 @@ public class MainController extends Application
 
         //Editor
         this.editorController = new EditorController(this);
-        this.editorWindow = new EditorWindow(this.editorController);
-        this.editorModel = new EditorModel(this.editorController);
-        this.editorController.setEditorWindow(editorWindow);
-        this.editorController.setEditorModel(editorModel);
 
         this.launchWindow = new LaunchWindow(this);
         this.settingsWindow = new SettingsWindow(this);
@@ -93,7 +85,7 @@ public class MainController extends Application
         //this.mainStage.setWidth(Consts.DEFAULT_WINDOW_WIDTH);
         this.mainStage.setMaximized(true);
 
-        this.mainStage.setScene(editorWindow.getConfiguredEditorScene());
+        this.mainStage.setScene(this.editorController.getEditorWindow().getConfiguredEditorScene());
         this.mainStage.hide();
         this.mainStage.show();
     }

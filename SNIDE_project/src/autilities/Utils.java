@@ -2,12 +2,10 @@ package autilities;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -96,13 +94,16 @@ public class Utils
 
         try
         {
-            FileWriter fw = new FileWriter(fileToSave);
-            BufferedWriter bw = new BufferedWriter(fw);
+            if (fileToSave != null)
+            {
+                FileWriter fw = new FileWriter(fileToSave);
+                BufferedWriter bw = new BufferedWriter(fw);
 
-            bw.write(fileContent);
-            bw.close();
+                bw.write(fileContent);
+                bw.close();
 
-            printDebug("File created: " + getFileInfo(fileToSave, "CREATED", true));//fixme debug
+                printDebug("File created: " + getFileInfo(fileToSave, "CREATED", true));//fixme debug
+            }
         }
         catch (FileNotFoundException e)
         {
