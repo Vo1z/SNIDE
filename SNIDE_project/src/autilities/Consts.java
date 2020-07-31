@@ -1,5 +1,6 @@
 package autilities;
 
+import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 
 public class Consts
@@ -11,4 +12,7 @@ public class Consts
     //Window properties
     public final static double DEFAULT_WINDOW_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
     public final static double DEFAULT_WINDOW_HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
+
+    //File chooser
+    public final static FileChooser.ExtensionFilter FILES_POOL_EXTENSION = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");//FIXME
 }

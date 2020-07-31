@@ -124,6 +124,12 @@ public class MainController extends Application
         }
     }
 
+    public void openEditorWindowWithNewFile()
+    {
+        this.openEditorWindow();
+        this.editorController.createNewFile();
+    }
+
     public void openFileChooserAndAddChosenFilesToEditor()
     {
         List<File> chosenFiles = Utils.getFilesFromFileChooser(this.mainStage);

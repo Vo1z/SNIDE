@@ -60,9 +60,9 @@ public class EditorWindow
         Button exitButton = new Button("Exit");
 
         //Buttons configuration
-        addNewFileButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
+        addNewFileButton.setOnAction(e -> this.editorController.createNewFile()); //TODO
 
-        saveButton.setOnAction(e -> editorController.getEditorModel().saveFile(this.tabPanel.getSelectionModel().getSelectedIndex())); //TODO
+        saveButton.setOnAction(e -> this.editorController.getEditorModel().saveFile(this.tabPanel.getSelectionModel().getSelectedIndex())); //TODO
 
         loadButton.setOnAction(e -> this.editorController.getMainController().openFileChooserAndAddChosenFilesToEditor());
 

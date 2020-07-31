@@ -24,6 +24,12 @@ public class EditorController
         this.mainController = mainController;
     }
 
+    public void createNewFile()
+    {
+        this.editorModel.addTab(new EditorTab(this));
+        this.editorWindow.updateTabs();
+    }
+
     public void addFileToEditor(File aFile)
     {
         this.editorModel.addTab(new EditorTab(aFile, this));

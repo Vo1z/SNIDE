@@ -37,7 +37,7 @@ public class LaunchWindow
         Button gitHubButton = new Button("GitHub");
 
         //Buttons configuration
-        createButton.setOnAction(event -> this.mainController.openEditorWindow());
+        createButton.setOnAction(event -> this.mainController.openEditorWindowWithNewFile());
 
         openButton.setOnAction(e ->
         {

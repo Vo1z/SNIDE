@@ -1,6 +1,7 @@
 package model;
 
 import autilities.Utils;
+import com.sun.webkit.network.Util;
 import controller.EditorController;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
@@ -27,6 +28,18 @@ public class EditorTab extends Tab
         //Tab configuration
         this.setOnClosed(event -> editorController.removeFileFromEditor(this));
         this.setText(file.getName());
+        this.setContent(tabTextArea);
+    }
+
+    public EditorTab(EditorController editorController)
+    {
+        this.editorController = editorController;
+        this.initialFileContent = "";
+        this.tabTextArea = new TextArea(initialFileContent);
+
+        //Tab configuration
+        this.setOnClosed(event -> editorController.removeFileFromEditor(this));
+        this.setText("new");
         this.setContent(tabTextArea);
     }
 
@@ -58,22 +71,47 @@ public class EditorTab extends Tab
 
     public void saveFile()
     {
-        if (!isSaved())
+        if (this.file != null)
         {
-            try
+            if (!isSaved())
             {
-                FileWriter fw = new FileWriter(file);
-                BufferedWriter bf = new BufferedWriter(fw);
+                try
+                {
+                    FileWriter fw = new FileWriter(file);
+                    BufferedWriter bw = new BufferedWriter(fw);
 
-                bf.write(this.tabTextArea.getText());
+                    bw.write(this.tabTextArea.getText());
+                    bw.close();
 
-                Utils.printDebug(Utils.getFileInfo(file, "UPDATE"));//fixme debug
-                bf.close();
+                    Utils.printDebug(Utils.getFileInfo(file, "UPDATE", false));//fixme debug
+                }
+                catch (IOException e)
+                {
+                    e.printStackTrace();
+                }
             }
-            catch (IOException e)
+        }
+        else
+        {
+            if (this.tabTextArea.getText().length() <= 0)
             {
-                e.printStackTrace();
+                Utils.showAlertWindow("There is no content to save");
             }
+            else
+            {
+                this.file = Utils.getSavedFileFromFileChooser(this.editorController.getMainController().getMainStage(),
+                        this.tabTextArea.getText()); //Creates new file and inputs content;
+            }
+        }
+
+        //Updates tab title due to file name
+        if (file != null)
+        {
+            this.setText(file.getName());
+        }
+        else
+        {
+            this.setText("new");
         }
     }
 
