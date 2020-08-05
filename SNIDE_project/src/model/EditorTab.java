@@ -25,7 +25,7 @@ public class EditorTab extends Tab
         this.tabTextArea = new TextArea(initialFileContent);
 
         //Tab configuration
-        this.setOnClosed(event -> editorController.removeFileFromEditor(this));
+        this.setOnClosed(event -> this.editorController.getEditorModel().removeTab(this));
         this.setText(file.getName());
         this.setContent(tabTextArea);
     }
@@ -37,7 +37,7 @@ public class EditorTab extends Tab
         this.tabTextArea = new TextArea(initialFileContent);
 
         //Tab configuration
-        this.setOnClosed(event -> editorController.removeFileFromEditor(this));
+        this.setOnClosed(event -> closeTab());
         this.setText("new");
         this.setContent(tabTextArea);
     }
@@ -66,6 +66,32 @@ public class EditorTab extends Tab
         }
 
         return fileContentBuffer.toString();
+    }
+
+    private void closeTab()
+    {
+        if (this.tabTextArea.getText() != null && !isSaved())
+        {
+            //Opens dialog window and gets result from it
+            String result = Utils.showConfirmDialog("Do you want to save this file ?", "Yes", "No");
+
+            //Reviews result
+            switch (result)
+            {
+                case "Yes":
+                    saveFile();
+                    break;
+                case "No":
+                    this.editorController.removeFileFromEditor(this);
+                    break;
+                default:
+                    this.editorController.getEditorWindow().updateTabs();
+            }
+        }
+        else
+        {
+            this.editorController.removeFileFromEditor(this);
+        }
     }
 
     public void saveFile()

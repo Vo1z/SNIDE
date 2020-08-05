@@ -45,7 +45,7 @@ public class EditorWindow
 
     private Pane createControlPanel()
     {
-        VBox topPanelPane = new VBox();
+        VBox controlPanel = new VBox();
         Button addNewFileButton = new Button("New");
         Button saveButton = new Button("Save");
         Button loadButton = new Button("Load");
@@ -53,24 +53,24 @@ public class EditorWindow
         Button exitButton = new Button("Exit");
 
         //Buttons configuration
-        addNewFileButton.setOnAction(e -> this.editorController.createNewFile()); //TODO
+        addNewFileButton.setOnAction(e -> this.editorController.createNewFile());
 
-        saveButton.setOnAction(e -> this.editorController.getEditorModel().saveFile(this.tabPanel.getSelectionModel().getSelectedIndex())); //TODO
+        saveButton.setOnAction(e -> this.editorController.getEditorModel().saveFile(this.tabPanel.getSelectionModel().getSelectedIndex()));
 
         loadButton.setOnAction(e -> this.editorController.getMainController().openFileChooserAndAddChosenFilesToEditor());
 
-        settingsButton.setOnAction(e -> this.editorController.getMainController().openSettingsWindow()); //TODO
+        settingsButton.setOnAction(e -> this.editorController.getMainController().openSettingsWindow());
 
         exitButton.setOnAction(e -> Utils.stopProgram());
 
         //Adding to pane
-        topPanelPane.getChildren().add(addNewFileButton);
-        topPanelPane.getChildren().add(saveButton);
-        topPanelPane.getChildren().add(loadButton);
-        topPanelPane.getChildren().add(settingsButton);
-        topPanelPane.getChildren().add(exitButton);
+        controlPanel.getChildren().add(addNewFileButton);
+        controlPanel.getChildren().add(saveButton);
+        controlPanel.getChildren().add(loadButton);
+        controlPanel.getChildren().add(settingsButton);
+        controlPanel.getChildren().add(exitButton);
 
-        return topPanelPane;
+        return controlPanel;
     }
 
     public void updateTabs()

@@ -2,12 +2,16 @@ package autilities;
 
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -122,6 +126,39 @@ public class Utils
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setHeaderText(alertMessage);
         alert.showAndWait();
+    }
+
+    public static String showConfirmDialog(String headerText, String... options)
+    {
+        //Assign
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        StringBuilder resultStr = new StringBuilder("null");
+
+        //Alert configuration
+        alert.getButtonTypes().remove(0, alert.getButtonTypes().size() - 1);
+        alert.setTitle("Warning");
+        alert.setHeaderText(headerText);
+
+        //Button set up
+        Arrays.stream(options)
+                .forEach(
+                        s ->
+                        {
+                            ButtonType bt = new ButtonType(s);
+                            alert.getButtonTypes().add(bt);
+                        }
+                );
+
+        //Getting the result
+        Optional<ButtonType> resultButtonType = alert.showAndWait();
+
+        alert.getButtonTypes().stream()
+                .filter(buttonType -> buttonType == resultButtonType.get())
+                .forEach(buttonType -> resultStr.replace(0, resultStr.length(), buttonType.getText()));
+
+        printDebug('\"' + resultStr.toString() + '\"' + "was selected from UTILS");//fixme debug
+
+        return resultStr.toString();
     }
 
     public static void stopProgram()

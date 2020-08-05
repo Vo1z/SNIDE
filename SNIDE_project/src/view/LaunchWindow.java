@@ -1,6 +1,7 @@
 package view;
 
 import autilities.Themes;
+import autilities.Utils;
 import controller.MainController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -35,6 +36,7 @@ public class LaunchWindow
         Button openButton = new Button("Open");
         Button settingsButton = new Button("Settings");
         Button gitHubButton = new Button("GitHub");
+        Button exitButton = new Button("Exit");
 
         //Buttons configuration
         createButton.setOnAction(event -> this.mainController.openEditorWindowWithNewFile());
@@ -47,10 +49,12 @@ public class LaunchWindow
 
         settingsButton.setOnAction(e -> this.mainController.openSettingsWindow());
 
-        gitHubButton.setOnAction(event -> this.mainController.openGitHubInBrowser());
+        gitHubButton.setOnAction(e -> this.mainController.openGitHubInBrowser());
+
+        exitButton.setOnAction(e -> Utils.stopProgram());
 
         //Adding to pane
-        createdRootPane.getChildren().addAll(createButton, openButton, settingsButton, gitHubButton);
+        createdRootPane.getChildren().addAll(createButton, openButton, settingsButton, gitHubButton, exitButton);
 
         //Root pane configuration
         createdRootPane.getStylesheets().add(Themes.LAUNCH_WINDOW_THEME_1);

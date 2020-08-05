@@ -1,5 +1,6 @@
 package model;
 
+import autilities.Utils;
 import controller.EditorController;
 import javafx.scene.control.Tab;
 
@@ -18,12 +19,13 @@ public class EditorModel
 
     public void addTab(EditorTab editorTab)
     {
+        Utils.printDebug("Adding to MODEL \"" + editorTab.getText() + "\"");//fixme debug
         this.editorTabs.add(editorTab);
     }
 
     public void removeTab(EditorTab editorTab)
     {
-        System.err.println("Removing from MODEL " + editorTab.getText());//fixme debug
+        System.err.println("Removing from MODEL \"" + editorTab.getText() + "\"");//fixme debug
         this.editorTabs.remove(editorTab);
     }
 
