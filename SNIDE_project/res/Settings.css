@@ -1,0 +1,59 @@
+.root
+{
+    -fx-background-color: wheat;
+    -fx-spacing: 20px;
+}
+
+HBox
+{
+    -fx-spacing: 100px;
+    -fx-alignment: center;
+}
+
+VBox
+{
+    -fx-spacing: 10px;
+}
+
+OptionHBox
+{
+    -fx-font-size: 12pt;
+    -fx-spacing: 100px;
+    -fx-font-family: Cuprum;
+}
+
+.button
+{
+    -fx-alignment: center;
+    -fx-background-radius: 99,0;
+    -fx-background-color: darkgray;
+    -fx-pref-height: 10px;
+    -fx-pref-width: 100px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 12pt;
+}
+
+.button:pressed
+{
+    -fx-alignment: center;
+    -fx-background-radius: 99,0;
+    -fx-background-color: coral;
+    -fx-pref-height: 10px;
+    -fx-pref-width: 100px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 12pt;
+}
+
+.button:hover
+{
+    -fx-alignment: center;
+    -fx-background-radius: 99,0;
+    -fx-background-color: lightgray;
+    -fx-pref-height: 10px;
+    -fx-pref-width: 100px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 12pt;
+}
