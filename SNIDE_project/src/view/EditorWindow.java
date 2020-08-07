@@ -36,6 +36,9 @@ public class EditorWindow
         //Configuration of root
         root.getStylesheets().add(Themes.IDE_WINDOW_THEME_1);
 
+        //Configuration of tab panel
+        this.tabPanel.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
+
         //Adding to root
         root.getChildren().add(createControlPanel());
         root.getChildren().add(tabPanel);

@@ -1,9 +1,12 @@
 package view;
 
+import autilities.Themes;
 import autilities.WindowType;
 import controller.MainController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -28,10 +31,29 @@ public class SettingsWindow
     {
         VBox rootPane = new VBox();
 
+        //Root pane configuration
+        rootPane.getStylesheets().add(Themes.SETTINGS_WINDOW_THEME_1);
+
         //Adding to pane
+        rootPane.getChildren().addAll(createOptions());
         rootPane.getChildren().add(createBottomButtons());
 
         return rootPane;
+    }
+
+    private Pane createOptions()
+    {
+        VBox options = new VBox();
+
+        OptionHBox option1 = new OptionHBox("option1");
+        OptionHBox option2 = new OptionHBox("option2");
+        OptionHBox option3 = new OptionHBox("option3");
+        OptionHBox option4 = new OptionHBox("option4");
+
+        //Adding elements to pane
+        options.getChildren().addAll(option1,option2,option3,option4);
+
+        return options;
     }
 
     private Pane createBottomButtons()
