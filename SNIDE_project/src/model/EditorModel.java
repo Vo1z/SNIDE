@@ -2,6 +2,7 @@ package model;
 
 import autilities.Utils;
 import controller.EditorController;
+import javafx.application.Platform;
 import javafx.scene.control.Tab;
 
 import java.util.ArrayList;
@@ -11,10 +12,44 @@ public class EditorModel
     private EditorController editorController;
     private ArrayList<EditorTab> editorTabs;
 
+    //Model components
+    private boolean isRefresherWorking;
+
     public EditorModel(EditorController editorController)
     {
         this.editorController = editorController;
         this.editorTabs = new ArrayList<>();
+        this.isRefresherWorking = true;
+        startRefresherThread();
+    }
+
+    private void startRefresherThread()
+    {
+        Thread refresher = new Thread(
+                () ->
+                {
+                    while (isRefresherWorking)
+                    {
+                        try
+                        {
+                            Platform.runLater(() ->
+                            {
+                                for (var tab : this.editorTabs)
+                                {
+                                    tab.updateSaveStatus();
+                                }
+                            });
+
+                            Thread.sleep(300);
+                        }
+                        catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+        refresher.start();
     }
 
     public void addTab(EditorTab editorTab)
@@ -25,7 +60,7 @@ public class EditorModel
 
     public void removeTab(EditorTab editorTab)
     {
-        System.err.println("Removing from MODEL \"" + editorTab.getText() + "\"");//fixme debug
+        Utils.printDebug("Removing from MODEL \"" + editorTab.getText() + "\"");//fixme debug
         this.editorTabs.remove(editorTab);
     }
 

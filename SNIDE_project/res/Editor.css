@@ -78,7 +78,7 @@ VBox
     -fx-background-radius: 99,0;
     -fx-background-color: darkgray;
     -fx-min-height: 20px;
-    -fx-min-width: 80px;
+    -fx-min-width: 90px;
 
     -fx-font-family: Cuprum;
     -fx-font-size: 12pt;
@@ -89,7 +89,7 @@ VBox
     -fx-background-radius: 99,0;
     -fx-background-color: coral;
     -fx-min-height: 20px;
-    -fx-min-width: 80px;
+    -fx-min-width: 90px;
 
     -fx-font-family: Cuprum;
     -fx-font-size: 12pt;
@@ -100,7 +100,7 @@ VBox
     -fx-background-radius: 99,0;
     -fx-background-color: lightgray;
     -fx-min-height: 20px;
-    -fx-min-width: 80px;
+    -fx-min-width: 90px;
 
     -fx-font-family: Cuprum;
     -fx-font-size: 12pt;

@@ -11,7 +11,7 @@ public class EditorTab extends Tab
 {
     private EditorController editorController;
     private File file;
-    private String initialFileContent;
+    private String fileContent;
 
     //Tab components
     private TextArea tabTextArea;
@@ -21,8 +21,8 @@ public class EditorTab extends Tab
         //Assign
         this.file = inputFile;
         this.editorController = editorController;
-        this.initialFileContent = getContentFromFile(file);
-        this.tabTextArea = new TextArea(initialFileContent);
+        this.fileContent = Utils.getFileContent(inputFile);
+        this.tabTextArea = new TextArea(fileContent);
 
         //Tab configuration
         this.setOnClosed(event -> this.editorController.getEditorModel().removeTab(this));
@@ -33,39 +33,13 @@ public class EditorTab extends Tab
     public EditorTab(EditorController editorController)
     {
         this.editorController = editorController;
-        this.initialFileContent = "";
-        this.tabTextArea = new TextArea(initialFileContent);
+        this.fileContent = "";
+        this.tabTextArea = new TextArea(fileContent);
 
         //Tab configuration
         this.setOnClosed(event -> closeTab());
         this.setText("new");
         this.setContent(tabTextArea);
-    }
-
-    private String getContentFromFile(File file)
-    {
-        StringBuffer fileContentBuffer = new StringBuffer();
-
-        try
-        {
-            FileInputStream fis = new FileInputStream(file);
-            int charId;
-
-            while ((charId = fis.read()) != -1)
-            {
-                fileContentBuffer.append((char) charId);
-            }
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-        return fileContentBuffer.toString();
     }
 
     private void closeTab()
@@ -108,6 +82,8 @@ public class EditorTab extends Tab
                     bw.write(this.tabTextArea.getText());
                     bw.close();
 
+                    this.fileContent = this.tabTextArea.getText();
+
                     Utils.printDebug(Utils.getFileInfo(file, "UPDATE", false));//fixme debug
                 }
                 catch (IOException e)
@@ -140,10 +116,23 @@ public class EditorTab extends Tab
         }
     }
 
-    //Getters
-    public String getInitialFileContent()
+    public void updateSaveStatus()
     {
-        return this.initialFileContent;
+        if (!isSaved())
+        {
+            this.setText(this.file.getName()+'*');
+        }
+        else
+        {
+            if (this.file != null)
+                this.setText(this.file.getName());
+        }
+    }
+
+    //Getters
+    public String getFileContent()
+    {
+        return this.fileContent;
     }
 
     public File getFile()
@@ -153,14 +142,18 @@ public class EditorTab extends Tab
 
     public String getTextAreaContent()
     {
-        return tabTextArea.getText();
+        return this.tabTextArea.getText();
     }
 
     public boolean isSaved()
     {
-        if (this.tabTextArea.getText().equals(initialFileContent))
+        if (this.tabTextArea.getText().equals(fileContent))
+        {
             return true;
+        }
         else
+        {
             return false;
+        }
     }
 }

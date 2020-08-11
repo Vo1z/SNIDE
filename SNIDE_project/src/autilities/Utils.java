@@ -17,6 +17,8 @@ import java.util.regex.Pattern;
 
 public class Utils
 {
+    private static boolean showDebug = true;
+
     public static String getFileContent(File inputFile)
     {
         StringBuffer fileContent = new StringBuffer();
@@ -189,9 +191,11 @@ public class Utils
 
     public static void printDebug(String message)
     {
-        System.err.println("DEBUG LOG:");
-        System.err.println("{");
-        System.err.println(message);
-        System.err.println("}");
+        if (showDebug)
+        {
+            System.err.println("--------------DEBUG LOG--------------");
+            System.err.println(message);
+            //System.err.println("-------------------------------------");
+        }
     }
 }
