@@ -1,14 +1,11 @@
 package controller;
 
-import autilities.Consts;
-import autilities.ElementsTicker;
-import autilities.Utils;
-import autilities.WindowType;
+import autilities.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import view.LaunchWindow;
-import view.SettingsWindow;
+import view.launch.LaunchWindow;
+import view.settings.SettingsWindow;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +17,7 @@ public class MainController extends Application
 
     private LaunchWindow launchWindow;
     private SettingsWindow settingsWindow;
+    private ThreadManager threadManager;
 
     private Stage mainStage;
     private ElementsTicker<WindowType> windowHist;
@@ -47,12 +45,13 @@ public class MainController extends Application
 
         this.launchWindow = new LaunchWindow(this);
         this.settingsWindow = new SettingsWindow(this);
+        this.threadManager = new ThreadManager(this);
         this.windowHist = new ElementsTicker<>(WindowType.values().length);
 
-
+        //Stage configuration
+        //this.mainStage.initStyle(StageStyle.UNDECORATED);
         this.mainStage.setTitle("SNIDE");
         this.openLaunchWindow();
-//        this.mainStage.initStyle(StageStyle.UNDECORATED);
         this.mainStage.show();
     }
 
@@ -65,6 +64,7 @@ public class MainController extends Application
     public void openLaunchWindow()
     {
         this.windowHist.push(WindowType.LAUNCH_WINDOW);
+        this.mainStage.hide();
 
         this.mainStage.setResizable(false);
         this.mainStage.setMaximized(false);
@@ -72,13 +72,13 @@ public class MainController extends Application
         this.mainStage.setHeight(600);
 
         this.mainStage.setScene(launchWindow.getConfiguredLaunchScene());
-        this.mainStage.hide();
         this.mainStage.show();
     }
 
     public void openEditorWindow()
     {
         this.windowHist.push(WindowType.EDITOR_WINDOW);
+        this.mainStage.hide();
 
         this.mainStage.setResizable(true);
         //this.mainStage.setHeight(Consts.DEFAULT_WINDOW_HEIGHT);
@@ -86,13 +86,13 @@ public class MainController extends Application
         this.mainStage.setMaximized(true);
 
         this.mainStage.setScene(this.editorController.getEditorWindow().getConfiguredEditorScene());
-        this.mainStage.hide();
         this.mainStage.show();
     }
 
     public void openSettingsWindow()
     {
         this.windowHist.push(WindowType.SETTINGS_WINDOW);
+        this.mainStage.hide();
 
         this.mainStage.setResizable(false);
         this.mainStage.setMaximized(false);
@@ -100,7 +100,6 @@ public class MainController extends Application
         this.mainStage.setHeight(600);
 
         this.mainStage.setScene(settingsWindow.getConfiguredSettingsScene());
-        this.mainStage.hide();
         this.mainStage.show();
     }
 
@@ -108,7 +107,7 @@ public class MainController extends Application
     {
         try
         {
-            new ProcessBuilder("x-www-browser", Consts.GitHub_URL).start();
+            new ProcessBuilder("x-www-browser", SnideConsts.GitHub_URL).start();
         }
         catch (IOException ioException)
         {
@@ -124,20 +123,14 @@ public class MainController extends Application
 
     public void openFileChooserAndAddChosenFilesToEditor()
     {
-        List<File> chosenFiles = Utils.getFilesFromFileChooser(this.mainStage);
+        List<File> chosenFiles = SnideUtils.getFilesFromFileChooser(this.mainStage);
 
         if(chosenFiles != null)
         {
-            chosenFiles.stream().forEach(
-                    file ->
-                    {
-                        this.editorController.addFileToEditor(file);
-                    }
-            );
+            chosenFiles.stream().forEach( file -> this.editorController.addFileToEditor(file) );
         }
     }
 
-    //Editor controller
     //Getters
 
     public Scene getCurrentScene()
@@ -149,6 +142,11 @@ public class MainController extends Application
     public Stage getMainStage()
     {
         return this.mainStage;
+    }
+
+    public EditorController getEditorController()
+    {
+        return  this.editorController;
     }
 
     public Object getPreviousWindowType()

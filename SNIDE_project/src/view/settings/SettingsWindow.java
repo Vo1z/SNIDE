@@ -1,12 +1,10 @@
-package view;
+package view.settings;
 
-import autilities.Themes;
+import autilities.SnideThemes;
 import autilities.WindowType;
 import controller.MainController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -32,7 +30,7 @@ public class SettingsWindow
         VBox rootPane = new VBox();
 
         //Root pane configuration
-        rootPane.getStylesheets().add(Themes.SETTINGS_WINDOW_THEME_1);
+        rootPane.getStylesheets().add(SnideThemes.SETTINGS_WINDOW_THEME_1);
 
         //Adding to pane
         rootPane.getChildren().addAll(createOptions());

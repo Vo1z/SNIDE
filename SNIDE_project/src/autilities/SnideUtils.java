@@ -11,11 +11,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Utils
+public class SnideUtils
 {
     private static boolean showDebug = true;
 
@@ -94,7 +93,7 @@ public class Utils
     {
         File fileToSave;
         FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().add(Consts.FILES_POOL_EXTENSION);
+        fileChooser.getExtensionFilters().add(SnideConsts.FILES_POOL_EXTENSION);
 
         fileToSave = fileChooser.showSaveDialog(stage);
 
@@ -162,6 +161,46 @@ public class Utils
 
         return resultStr.toString();
     }
+
+    public static void startThread(boolean condition, SnideThreadTask task)
+    {
+        Thread thread = new Thread(
+                () ->
+                {
+                    while (condition)
+                    {
+                        Platform.runLater(() -> task.invoke());
+                    }
+                }
+        );
+
+        thread.start();
+    }
+
+    public static void startThread(boolean condition, int sleepTimer, SnideThreadTask task)
+    {
+        Thread thread = new Thread(
+                () ->
+                {
+                    while (condition)
+                    {
+                        try
+                        {
+                            Thread.sleep(sleepTimer);
+                            Platform.runLater(() -> task.invoke());
+                        }
+                        catch (InterruptedException e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+        );
+
+        thread.start();
+    }
+
 
     public static void stopProgram()
     {

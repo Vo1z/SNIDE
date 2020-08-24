@@ -1,4 +1,4 @@
-package view;
+package view.settings;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;

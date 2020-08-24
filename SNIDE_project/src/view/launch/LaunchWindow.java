@@ -1,7 +1,7 @@
-package view;
+package view.launch;
 
-import autilities.Themes;
-import autilities.Utils;
+import autilities.SnideThemes;
+import autilities.SnideUtils;
 import controller.MainController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -51,13 +51,13 @@ public class LaunchWindow
 
         gitHubButton.setOnAction(e -> this.mainController.openGitHubInBrowser());
 
-        exitButton.setOnAction(e -> Utils.stopProgram());
+        exitButton.setOnAction(e -> SnideUtils.stopProgram());
 
         //Adding to pane
         createdRootPane.getChildren().addAll(createButton, openButton, settingsButton, gitHubButton, exitButton);
 
         //Root pane configuration
-        createdRootPane.getStylesheets().add(Themes.LAUNCH_WINDOW_THEME_1);
+        createdRootPane.getStylesheets().add(SnideThemes.LAUNCH_WINDOW_THEME_1);
 
         return createdRootPane;
     }

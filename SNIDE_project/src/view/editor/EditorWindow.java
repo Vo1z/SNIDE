@@ -1,7 +1,7 @@
-package view;
+package view.editor;
 
-import autilities.Themes;
-import autilities.Utils;
+import autilities.SnideThemes;
+import autilities.SnideUtils;
 import controller.EditorController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -9,6 +9,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import model.EditorTab;
 
 public class EditorWindow
 {
@@ -34,7 +35,7 @@ public class EditorWindow
         HBox root = new HBox(10);
 
         //Configuration of root
-        root.getStylesheets().add(Themes.IDE_WINDOW_THEME_1);
+        root.getStylesheets().add(SnideThemes.IDE_WINDOW_THEME_1);
 
         //Configuration of tab panel
         this.tabPanel.setTabClosingPolicy(TabPane.TabClosingPolicy.ALL_TABS);
@@ -64,7 +65,7 @@ public class EditorWindow
 
         settingsButton.setOnAction(e -> this.editorController.getMainController().openSettingsWindow());
 
-        exitButton.setOnAction(e -> Utils.stopProgram());
+        exitButton.setOnAction(e -> SnideUtils.stopProgram());
 
         //Adding to pane
         controlPanel.getChildren().add(addNewFileButton);
@@ -85,7 +86,7 @@ public class EditorWindow
                             if (!this.tabPanel.getTabs().contains(editorTab))
                             {
                                 this.tabPanel.getTabs().add(editorTab);
-                                Utils.printDebug("Adding to VIEW"); //fixme debug
+                                SnideUtils.printDebug("Adding to VIEW"); //fixme debug
                             }
                         }
                 );
@@ -97,26 +98,26 @@ public class EditorWindow
                             if (!this.editorController.getEditorModel().getEditorTabs().contains(tab))
                             {
                                 this.tabPanel.getTabs().remove(tab);
-                                Utils.printDebug("Removing to VIEW"); //fixme debug
+                                SnideUtils.printDebug("Removing to VIEW"); //fixme debug
                             }
                         }
                 );
     }
 
     //Getters
-    public Scene getEditorScene()
-    {
-        return editorScene;
-    }
-
     public Scene getConfiguredEditorScene()
     {
-        return editorScene;
+        return this.editorScene;
     }
 
     public TabPane getTabPanel()
     {
-        return tabPanel;
+        return this.tabPanel;
+    }
+
+    public EditorTab getSelectedEditorTab()
+    {
+        return (EditorTab) this.tabPanel.getSelectionModel().getSelectedItem();
     }
 
 }

@@ -3,7 +3,7 @@ package autilities;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
 
-public class Consts
+public class SnideConsts
 {
     //Web links and file path
     public final static String GitHub_URL = "https://github.com/Vo1z/SNIDE";

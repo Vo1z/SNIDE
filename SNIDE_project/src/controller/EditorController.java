@@ -1,9 +1,8 @@
 package controller;
 
-import autilities.Utils;
 import model.EditorModel;
 import model.EditorTab;
-import view.EditorWindow;
+import view.editor.EditorWindow;
 
 import java.io.File;
 

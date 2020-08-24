@@ -1,6 +1,6 @@
 package model;
 
-import autilities.Utils;
+import autilities.SnideUtils;
 import controller.EditorController;
 import javafx.application.Platform;
 import javafx.scene.control.Tab;
@@ -20,48 +20,27 @@ public class EditorModel
         this.editorController = editorController;
         this.editorTabs = new ArrayList<>();
         this.isRefresherWorking = true;
-        startRefresherThread();
+        startRefreshingThread();
     }
 
-    private void startRefresherThread()
+    private void startRefreshingThread()
     {
-        Thread refresher = new Thread(
-                () ->
-                {
-                    while (isRefresherWorking)
-                    {
-                        try
+        SnideUtils.startThread(this.isRefresherWorking, 300,
+                () -> Platform.runLater(() ->
                         {
-                            Platform.runLater(() ->
+                            for (var tab : this.editorTabs)
                             {
-                                for (var tab : this.editorTabs)
-                                {
-                                    tab.updateSaveStatus();
-                                }
-                            });
-
-                            Thread.sleep(300);
+                                tab.updateSaveStatus();
+                            }
                         }
-                        catch (Exception e)
-                        {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
-        refresher.start();
+                )
+        );
     }
 
     public void addTab(EditorTab editorTab)
     {
-        Utils.printDebug("Adding to MODEL \"" + editorTab.getText() + "\"");//fixme debug
+        SnideUtils.printDebug("Adding to MODEL \"" + editorTab.getText() + "\"");//fixme debug
         this.editorTabs.add(editorTab);
-    }
-
-    public void removeTab(EditorTab editorTab)
-    {
-        Utils.printDebug("Removing from MODEL \"" + editorTab.getText() + "\"");//fixme debug
-        this.editorTabs.remove(editorTab);
     }
 
     public void saveFile(EditorTab editorTab)
@@ -76,9 +55,20 @@ public class EditorModel
             saveFile(this.editorTabs.get(index));
     }
 
+    public void removeTab(EditorTab editorTab)
+    {
+        SnideUtils.printDebug("Removing from MODEL \"" + editorTab.getText() + "\"");//fixme debug
+        this.editorTabs.remove(editorTab);
+    }
+
     public void removeTab(int index)
     {
         this.editorTabs.remove(index);
+    }
+
+    public void stopRefresherThread()
+    {
+        this.isRefresherWorking = false;
     }
 
     //Getters
