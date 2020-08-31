@@ -5,6 +5,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import log_lib.LogType;
+import log_lib.LogUnit;
 import log_lib.LogsStorage;
 
 import java.io.*;
@@ -40,6 +42,8 @@ public class SnideUtils
         }
         catch (IOException ex)
         {
+            //FIXME LOG
+            LogsStorage.addLog(new LogUnit(ex, "SnideUtils"));
             ex.printStackTrace();
         }
 
@@ -63,8 +67,18 @@ public class SnideUtils
 
             fis.close();
         }
-        catch (FileNotFoundException e) { e.printStackTrace(); }
-        catch (IOException ioException) { ioException.printStackTrace(); }
+        catch (FileNotFoundException fileNotFoundException)
+        {
+            //FIXME LOG
+            LogsStorage.addLog(new LogUnit(fileNotFoundException, "SnideUtils"));
+            fileNotFoundException.printStackTrace();
+        }
+        catch (IOException ioException)
+        {
+            //FIXME LOG
+            LogsStorage.addLog(new LogUnit(ioException, "SnideUtils"));
+            ioException.printStackTrace();
+        }
 
         //Finding words
         Pattern pattern = Pattern.compile("\\w+");
@@ -117,10 +131,14 @@ public class SnideUtils
         }
         catch (FileNotFoundException e)
         {
+            //FIXME LOG
+            LogsStorage.addLog(new LogUnit(e, "SnideUtils"));
             e.printStackTrace();
         }
         catch (IOException e)
         {
+            //FIXME LOG
+            LogsStorage.addLog(new LogUnit(e, "SnideUtils"));
             e.printStackTrace();
         }
 
@@ -198,6 +216,8 @@ public class SnideUtils
                         }
                         catch (InterruptedException e)
                         {
+                            //FIXME LOG
+                            LogsStorage.addLog(new LogUnit(e, "SnideUtils"));
                             e.printStackTrace();
                         }
 
@@ -210,8 +230,10 @@ public class SnideUtils
 
     public static void stopProgram()
     {
-        LogsStorage.createLogFiles(SnideConsts.LOG_FILE_PATH);
+        //Fixme log
+        LogsStorage.addLog(new LogUnit(LogType.EVENT, "stopProgram", "SnideUtils"));
 
+        LogsStorage.createLogFiles(SnideConsts.LOG_FILE_PATH);
         Platform.exit();
         System.exit(0);
     }
@@ -252,7 +274,6 @@ public class SnideUtils
         {
             System.err.println("--------------DEBUG LOG--------------");
             System.err.println(message);
-            //System.err.println("-------------------------------------");
         }
     }
 

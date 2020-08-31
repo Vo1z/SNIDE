@@ -23,6 +23,41 @@ public class LogUnit
         this.invocationPlace = getInvocationPlaceInformation(invocationPlace);
     }
 
+    public LogUnit(LogType logType, String description, String invocationPlace)
+    {
+        logIDCounter++;
+
+        this.logID = logIDCounter;
+        this.logType = logType;
+        this.time = SnideUtils.getCurrentTime();
+        this.description = description;
+        this.invocationPlace = invocationPlace;
+    }
+
+    public LogUnit(Exception exception, String invocationPlace)
+    {
+        logIDCounter++;
+
+        this.logID = logIDCounter;
+        this.logType = LogType.EXCEPTION;
+        this.time = SnideUtils.getCurrentTime();
+        this.description = "Message: " + exception.getMessage() + "\t" +
+                            "Cause: " + exception.getCause();
+        this.invocationPlace = invocationPlace;
+    }
+
+    public LogUnit(Exception exception, Object invocationPlace)
+    {
+        logIDCounter++;
+
+        this.logID = logIDCounter;
+        this.logType = LogType.EXCEPTION;
+        this.time = SnideUtils.getCurrentTime();
+        this.description = "Message: " + exception.getMessage() + "\t" +
+                "Cause: " + exception.getCause();
+        this.invocationPlace = getInvocationPlaceInformation(invocationPlace);
+    }
+
     public LogUnit(Object place, String description)
     {
         logIDCounter++;
