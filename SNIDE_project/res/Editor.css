@@ -18,6 +18,8 @@ GridPane
 {
     -fx-pref-width: 1000000px;
     -fx-pref-height: 100000000px;
+
+    -fx-hgap: 10px;
 }
 
 /*Tab properties*/

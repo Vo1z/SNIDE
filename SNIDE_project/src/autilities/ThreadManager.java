@@ -1,9 +1,7 @@
 package autilities;
 
 import controller.MainController;
-import javafx.application.Platform;
 import model.EditorModel;
-import model.EditorTab;
 
 public class ThreadManager
 {
@@ -12,7 +10,6 @@ public class ThreadManager
 
     //ThreadManager components
     private boolean isEditorModelRefresherWorking;
-    private boolean isEditorTabRefresherWorking;
 
     public ThreadManager(MainController mainController)
     {
@@ -35,29 +32,10 @@ public class ThreadManager
                     for (var tab : editorModel.getEditorTabs())
                     {
                         tab.updateSaveStatus();
+                        tab.updateLabels();
                     }
                 }
         );
-    }
-
-    //EditorTab s thread
-    private void configureEditorTabRefresher()
-    {
-        EditorTab editorTab = this.mainController
-                .getEditorController()
-                .getEditorWindow()
-                .getSelectedEditorTab();
-
-        //TODO implement refresher inside EditorTab
-//        SnideUtils.startThread(this.isEditorTabRefresherWorking,
-//                () ->
-//                {
-//                    editorTab = this.mainController
-//                            .getEditorController()
-//                            .getEditorWindow()
-//                            .getSelectedEditorTab();
-//                }
-//        );
     }
 
     public void stopEditorModelRefresher()

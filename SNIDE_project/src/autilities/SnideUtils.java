@@ -5,8 +5,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import log_lib.LogsStorage;
 
 import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -16,8 +19,9 @@ import java.util.regex.Pattern;
 
 public class SnideUtils
 {
-    private static boolean showDebug = true;
+    private static boolean isDebugShown = true;
 
+    //IO
     public static String getFileContent(File inputFile)
     {
         StringBuffer fileContent = new StringBuffer();
@@ -74,6 +78,7 @@ public class SnideUtils
         return words;
     }
 
+    //File manager
     public static List<File> getFilesFromFileChooser(Stage stage)
     {
         FileChooser fileChooser = new FileChooser();
@@ -122,13 +127,6 @@ public class SnideUtils
         return fileToSave;
     }
 
-    public static void showAlertWindow(String alertMessage)
-    {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setHeaderText(alertMessage);
-        alert.showAndWait();
-    }
-
     public static String showConfirmDialog(String headerText, String... options)
     {
         //Assign
@@ -162,6 +160,15 @@ public class SnideUtils
         return resultStr.toString();
     }
 
+    //Windows
+    public static void showAlertWindow(String alertMessage)
+    {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setHeaderText(alertMessage);
+        alert.showAndWait();
+    }
+
+    //Threading
     public static void startThread(boolean condition, SnideThreadTask task)
     {
         Thread thread = new Thread(
@@ -201,10 +208,21 @@ public class SnideUtils
         thread.start();
     }
 
-
     public static void stopProgram()
     {
+        LogsStorage.createLogFiles(SnideConsts.LOG_FILE_PATH);
+
         Platform.exit();
+        System.exit(0);
+    }
+
+    //Time
+    public static String getCurrentTime()
+    {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime time = LocalDateTime.now();
+
+        return dtf.format(time);
     }
 
     //Debug
@@ -230,11 +248,23 @@ public class SnideUtils
 
     public static void printDebug(String message)
     {
-        if (showDebug)
+        if (isDebugShown)
         {
             System.err.println("--------------DEBUG LOG--------------");
             System.err.println(message);
             //System.err.println("-------------------------------------");
         }
+    }
+
+    //Configuration
+    public static void setIsDebugShown(boolean val)
+    {
+        isDebugShown = val;
+    }
+
+    //Getters
+    public static boolean isIsDebugShown()
+    {
+        return isDebugShown;
     }
 }

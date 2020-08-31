@@ -2,9 +2,7 @@ package model;
 
 import autilities.SnideUtils;
 import controller.EditorController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
@@ -22,9 +20,10 @@ public class EditorTab extends Tab
     private String fileContent;
 
     //Tab components
+    private Pane root;
     private TextArea tabTextArea;
-    private ListView<String> linesCounterListView;
-    private ObservableList<String> linesCounterObservableList;
+    private Label caretPositionInformationLabel;
+    private Label fileSizeInformationLabel;
 
     public EditorTab(File inputFile, EditorController editorController)
     {
@@ -33,11 +32,15 @@ public class EditorTab extends Tab
         this.editorController = editorController;
         this.fileContent = SnideUtils.getFileContent(inputFile);
         this.tabTextArea = new TextArea(fileContent);
+        this.caretPositionInformationLabel = new Label("Caret position: 0");
+        this.fileSizeInformationLabel = new Label("File size: 0");
+
+        this.root = createRootPane();
 
         //Tab configuration
         this.setOnClosed(event -> this.editorController.getEditorModel().removeTab(this));
         this.setText(file.getName());
-        this.setContent(createRootPane());//todo
+        this.setContent(this.root);
     }
 
     public EditorTab(EditorController editorController)
@@ -45,38 +48,26 @@ public class EditorTab extends Tab
         this.editorController = editorController;
         this.fileContent = "";
         this.tabTextArea = new TextArea(fileContent);
+        this.caretPositionInformationLabel = new Label("Caret position: 0");
+        this.fileSizeInformationLabel = new Label("File size: 0");
+
+        this.root = createRootPane();
 
         //Tab configuration
         this.setOnClosed(event -> closeTab());
         this.setText("new");
-        this.setContent(createRootPane());//todo
+        this.setContent(this.root);
     }
 
     private Pane createRootPane()
     {
         GridPane root = new GridPane();
 
-        //root.add(this.linesCounterListView, 0, 0, 1, 10);
-        root.add(tabTextArea, 1, 0, 10 , 10);
+        root.add(tabTextArea, 0, 0, 9 , 10);
+        root.add(caretPositionInformationLabel, 0, 10, 1, 10);
+        root.add(fileSizeInformationLabel, 2, 10, 1, 10);
 
         return root;
-
-    }
-
-    private void startRefreshingThread()//Todo implement thread inside ThreadManager
-    {
-        //Assign
-        ObservableList<String> lineNumbers = FXCollections.observableArrayList();
-        ListView<String> lineNumbersListView = new ListView<>();
-
-        for(int i = 1; i <= this.tabTextArea.getText().split("\n").length; i++)
-        {
-            lineNumbers.add(i + "");
-        }
-
-        //ListView configuration
-        lineNumbersListView.setItems(lineNumbers);
-        lineNumbersListView.snapSpaceY(0.5f);
     }
 
     public void saveFile()
@@ -169,6 +160,12 @@ public class EditorTab extends Tab
             else
                 this.setText("new");
         }
+    }
+
+    public void updateLabels()
+    {
+        this.caretPositionInformationLabel.setText("Caret position: " + this.tabTextArea.getCaretPosition());
+        this.fileSizeInformationLabel.setText("File size: " + this.tabTextArea.getLength());
     }
 
     //Getters
