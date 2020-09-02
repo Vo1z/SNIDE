@@ -47,9 +47,9 @@ public class LogsStorage
                 createLogFiles(path);
             }
         }
-        catch (IOException e)
+        catch (IOException ioException)
         {
-            e.printStackTrace();
+            ioException.printStackTrace();
         }
     }
 

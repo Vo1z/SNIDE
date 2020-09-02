@@ -2,14 +2,14 @@ package view.editor;
 
 import autilities.SnideThemes;
 import autilities.SnideUtils;
-import controller.EditorController;
+import controller.editor.EditorController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TabPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import model.EditorTab;
+import model.editor.EditorTab;
 
 public class EditorWindow
 {
@@ -52,7 +52,7 @@ public class EditorWindow
         VBox controlPanel = new VBox();
         Button addNewFileButton = new Button("New");
         Button saveButton = new Button("Save");
-        Button loadButton = new Button("Load");
+        Button loadButton = new Button("Open");
         Button settingsButton = new Button("Settings");
         Button exitButton = new Button("Exit");
 

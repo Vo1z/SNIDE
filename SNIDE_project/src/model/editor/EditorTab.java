@@ -1,12 +1,14 @@
-package model;
+package model.editor;
 
 import autilities.SnideUtils;
-import controller.EditorController;
+import controller.editor.EditorController;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import log_lib.LogUnit;
+import log_lib.LogsStorage;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -88,9 +90,11 @@ public class EditorTab extends Tab
 
                     SnideUtils.printDebug(SnideUtils.getFileInfo(file, "UPDATE", false));//fixme debug
                 }
-                catch (IOException e)
+                catch (IOException ioException)
                 {
-                    e.printStackTrace();
+                    //FIXME LOG
+                    LogsStorage.addLog(new LogUnit(ioException));
+                    ioException.printStackTrace();
                 }
             }
         }

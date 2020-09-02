@@ -9,6 +9,7 @@ public class SnideConsts
     public final static String GitHub_URL = "https://github.com/Vo1z/SNIDE";
     public final static String JAVA_KEYWORDS_PATH = "res/java_keywords";
     public final static String LOG_FILE_PATH = "logs/log.txt";
+    public final static String SETTINGS_FILE_PATH = "res/settings.txt";
 
     //Window properties
     public final static double DEFAULT_WINDOW_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();

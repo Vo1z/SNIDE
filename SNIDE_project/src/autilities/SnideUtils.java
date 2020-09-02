@@ -92,6 +92,27 @@ public class SnideUtils
         return words;
     }
 
+    public static void createFileWithContent(final String path, final String content)
+    {
+        try
+        {
+            File file = new File(path);
+            FileWriter fileWriter = new FileWriter(file);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+
+            bufferedWriter.write(content);
+
+            bufferedWriter.close();
+            fileWriter.close();
+        }
+        catch (IOException ioException)
+        {
+            //FIXME LOG
+            LogsStorage.addLog(new LogUnit(ioException));
+            ioException.printStackTrace();
+        }
+    }
+
     //File manager
     public static List<File> getFilesFromFileChooser(Stage stage)
     {

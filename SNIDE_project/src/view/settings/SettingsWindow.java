@@ -43,13 +43,13 @@ public class SettingsWindow
     {
         VBox options = new VBox();
 
-        OptionHBox option1 = new OptionHBox("option1");
-        OptionHBox option2 = new OptionHBox("option2");
-        OptionHBox option3 = new OptionHBox("option3");
-        OptionHBox option4 = new OptionHBox("option4");
+        OptionHBox option1 = new OptionHBox("Turn off log system"); //doesLogSystemWork
+        OptionHBox option2 = new OptionHBox("Option 2");
+        OptionHBox option3 = new OptionHBox("Option 3");
+        OptionHBox option4 = new OptionHBox("Option 4");
 
         //Adding elements to pane
-        options.getChildren().addAll(option1,option2,option3,option4);
+        options.getChildren().addAll(option1, option2, option3, option4);
 
         return options;
     }

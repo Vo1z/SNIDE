@@ -1,7 +1,7 @@
 package autilities;
 
 import controller.MainController;
-import model.EditorModel;
+import model.editor.EditorModel;
 
 public class ThreadManager
 {

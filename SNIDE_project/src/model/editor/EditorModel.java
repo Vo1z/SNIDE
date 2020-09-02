@@ -1,7 +1,7 @@
-package model;
+package model.editor;
 
 import autilities.SnideUtils;
-import controller.EditorController;
+import controller.editor.EditorController;
 import javafx.application.Platform;
 import javafx.scene.control.Tab;
 

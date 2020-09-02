@@ -1,9 +1,12 @@
 package controller;
 
 import autilities.*;
+import controller.editor.EditorController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import log_lib.LogUnit;
+import log_lib.LogsStorage;
 import view.launch.LaunchWindow;
 import view.settings.SettingsWindow;
 
@@ -111,6 +114,8 @@ public class MainController extends Application
         }
         catch (IOException ioException)
         {
+            //FIXME LOG
+            LogsStorage.addLog(new LogUnit(ioException));
             ioException.printStackTrace();
         }
     }

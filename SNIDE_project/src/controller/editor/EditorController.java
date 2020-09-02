@@ -1,7 +1,8 @@
-package controller;
+package controller.editor;
 
-import model.EditorModel;
-import model.EditorTab;
+import controller.MainController;
+import model.editor.EditorModel;
+import model.editor.EditorTab;
 import view.editor.EditorWindow;
 
 import java.io.File;
