@@ -1,0 +1,4 @@
+1. Refactor refreshing thread inside EditorModel -- done;
+2. Refactor internal thread inside EditorTab -- declined;
+3. Add exceptions in Log system -- done;
+4. Implement settings -- wip;

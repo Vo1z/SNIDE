@@ -4,9 +4,7 @@ import autilities.SnideConsts;
 import autilities.SnideUtils;
 import controller.settings.SettingsController;
 
-import java.io.*;
-import java.lang.reflect.Field;
-import java.util.Arrays;
+import java.io.File;
 
 public class SettingsModel
 {
@@ -27,7 +25,7 @@ public class SettingsModel
     }
 
     //Add booleans here
-    public void updateSettingsModel()
+    public void updateSettingsModel() //Sets proper booleans from settingsFileContent
     {
         //doesLogSystemWork
         if (this.settingsFileContent.matches("doesLogSystemWork\\s*=\\s*true"))
@@ -56,7 +54,7 @@ public class SettingsModel
     }
 
     //Add booleans here
-    public void setSettingsFile(String pathToSettingsFile)
+    public void createSettingsFile(String pathToSettingsFile) //Creates file with settings
     {
         StringBuilder fileContent = new StringBuilder();
 
@@ -69,9 +67,34 @@ public class SettingsModel
         SnideUtils.createFileWithContent(SnideConsts.SETTINGS_FILE_PATH, fileContent.toString());
     }
 
-    public void getSettingsFromFile()
+    public void getSettingsFromFileAndUpdateIt() //Updates file content and set proper booleans
     {
         this.settingsFileContent = SnideUtils.getFileContent(new File(SnideConsts.SETTINGS_FILE_PATH));
         updateSettingsModel();
+    }
+
+    @Override //fixme delete debug
+    public String toString()
+    {
+        return "SettingsModel{" +
+                "settingsController=" + settingsController +
+                ", settingsFileContent='" + settingsFileContent + '\'' +
+                ", doesLogSystemWork=" + doesLogSystemWork +
+                ", isOption2=" + isOption2 +
+                ", isOption3=" + isOption3 +
+                ", isOption4=" + isOption4 +
+                '}';
+    }
+
+    //Setters
+    public void setDoesLogSystemWork(boolean doesLogSystemWork)
+    {
+        this.doesLogSystemWork = doesLogSystemWork;
+    }
+
+    //Getters
+    public boolean DoesLogSystemWork()
+    {
+        return this.doesLogSystemWork;
     }
 }

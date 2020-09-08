@@ -17,6 +17,12 @@ public class SettingsWindow
     private Scene settingsScene;
     private Pane root;
 
+    //OptionBoxes
+    private OptionHBox doesLogSystemWork;
+    private OptionHBox option2;
+    private OptionHBox option3;
+    private OptionHBox option4;
+
     public SettingsWindow(MainController mainController)
     {
         this.mainController = mainController;
@@ -43,13 +49,13 @@ public class SettingsWindow
     {
         VBox options = new VBox();
 
-        OptionHBox option1 = new OptionHBox("Turn off log system"); //doesLogSystemWork
-        OptionHBox option2 = new OptionHBox("Option 2");
-        OptionHBox option3 = new OptionHBox("Option 3");
-        OptionHBox option4 = new OptionHBox("Option 4");
+        this.doesLogSystemWork = new OptionHBox("Turn off log system"); //doesLogSystemWork
+        this.option2 = new OptionHBox("Option 2");
+        this.option3 = new OptionHBox("Option 3");
+        this.option4 = new OptionHBox("Option 4");
 
         //Adding elements to pane
-        options.getChildren().addAll(option1, option2, option3, option4);
+        options.getChildren().addAll(doesLogSystemWork, option2, option3, option4);
 
         return options;
     }
@@ -87,5 +93,26 @@ public class SettingsWindow
     public Scene getConfiguredSettingsScene()
     {
         return this.settingsScene;
+    }
+
+    //Getters
+    public boolean getDoesLogSystemWork()
+    {
+        return this.doesLogSystemWork.isChecked();
+    }
+
+    public boolean getOption2()
+    {
+        return this.option2.isChecked();
+    }
+
+    public boolean getOption3()
+    {
+        return this.option3.isChecked();
+    }
+
+    public boolean getOption4()
+    {
+        return this.option4.isChecked();
     }
 }
