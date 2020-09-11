@@ -5,6 +5,8 @@ import autilities.SnideUtils;
 import controller.settings.SettingsController;
 
 import java.io.File;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SettingsModel
 {
@@ -12,10 +14,13 @@ public class SettingsModel
 
     //SettingsModel elements
     private String settingsFileContent;
+
+    //Todo add options here
     private boolean doesLogSystemWork;
     private boolean isOption2;
     private boolean isOption3;
     private boolean isOption4;
+    //private boolean isOption5;
 
     public SettingsModel(SettingsController settingsController)
     {
@@ -25,37 +30,59 @@ public class SettingsModel
     }
 
     //Add booleans here
-    public void updateSettingsModel() //Sets proper booleans from settingsFileContent
+    public void updateSettingsOptionsFromSettingsFile() //Sets proper booleans from settingsFileContent
     {
-        //doesLogSystemWork
-        if (this.settingsFileContent.matches("doesLogSystemWork\\s*=\\s*true"))
-            this.doesLogSystemWork = true;
-        else if(this.settingsFileContent.matches("doesLogSystemWork\\s*=\\s*false"))
-            this.doesLogSystemWork = false;
-        //option2
-        else if (this.settingsFileContent.matches("isOption2\\s*=\\s*true"))
-            this.isOption2 = true;
-        else if (this.settingsFileContent.matches("isOption2\\s*=\\s*false"))
-            this.isOption2 = false;
-        //option3
-        else if (this.settingsFileContent.matches("isOption3\\s*=\\s*true"))
-            this.isOption3 = true;
-        else if (this.settingsFileContent.matches("isOption3\\s*=\\s*false"))
-            this.isOption3 = false;
-        //option4
-        else if (this.settingsFileContent.matches("isOption4\\s*=\\s*true"))
-            this.isOption4 = true;
-        else if (this.settingsFileContent.matches("isOption4\\s*=\\s*false"))
-            this.isOption4 = false;
-//        else if (this.settingsFileContent.matches("isOption5\\s*=\\s*true"))
-//            this.isOption5 = true;
-//        else if (this.settingsFileContent.matches("isOption5\\s*=\\s*false"))
-//            this.isOption5 = false;
+        this.settingsFileContent = SnideUtils.getFileContent(new File(SnideConsts.SETTINGS_FILE_PATH));
+
+        if (settingsFileContent != null && settingsFileContent.length() > 0 )
+        {
+            //Todo add options here
+            Pattern pattern;
+            Matcher matcher;
+            String regexForTrueValues =
+                    "(doesLogSystemWork\\s*=\\s*true)|" +
+                        "(isOption2\\s*=\\s*true)|" +
+                        "(isOption3\\s*=\\s*true)|" +
+                        "(isOption4\\s*=\\s*true)";
+                        //(isOption5\\s*=\\s*true)
+            String regexForFalseValues =
+                    "(doesLogSystemWork\\s*=\\s*false)|" +
+                            "(isOption2\\s*=\\s*false)|" +
+                            "(isOption3\\s*=\\s*false)|" +
+                            "(isOption4\\s*=\\s*false)";
+                            //(isOption5\\s*=\\s*false)
+
+            pattern = Pattern.compile(regexForTrueValues);
+            matcher = pattern.matcher(settingsFileContent);
+            while (matcher.find())
+            {
+                if (matcher.group().contains("doesLogSystemWork")) doesLogSystemWork = true;
+                if (matcher.group().contains("isOption2")) isOption2 = true;
+                if (matcher.group().contains("isOption3")) isOption3 = true;
+                if (matcher.group().contains("isOption4")) isOption4 = true;
+//                if (matcher.group().contains("isOption5")) isOption5 = true;
+            }
+
+            pattern  = Pattern.compile(regexForFalseValues);
+            matcher = pattern.matcher(settingsFileContent);
+            while (matcher.find())
+            {
+                if (matcher.group().contains("doesLogSystemWork")) doesLogSystemWork = false;
+                if (matcher.group().contains("isOption2")) isOption2 = false;
+                if (matcher.group().contains("isOption3")) isOption3 = false;
+                if (matcher.group().contains("isOption4")) isOption4 = false;
+//                if (matcher.group().contains("isOption5")) isOption5 = false;
+            }
+
+            //fixme debug
+            SnideUtils.printDebug(this.toString());
+        }
     }
 
     //Add booleans here
     public void createSettingsFile(String pathToSettingsFile) //Creates file with settings
     {
+        //Todo add options here
         StringBuilder fileContent = new StringBuilder();
 
         fileContent.append("doesLogSystemWork = " + doesLogSystemWork + "\n");
@@ -67,18 +94,20 @@ public class SettingsModel
         SnideUtils.createFileWithContent(SnideConsts.SETTINGS_FILE_PATH, fileContent.toString());
     }
 
-    public void getSettingsFromFileAndUpdateIt() //Updates file content and set proper booleans
+    public void updateSettingsFromSettingsWindow()
     {
-        this.settingsFileContent = SnideUtils.getFileContent(new File(SnideConsts.SETTINGS_FILE_PATH));
-        updateSettingsModel();
+        //Todo add options here
+        this.doesLogSystemWork = this.settingsController.getSettingsWindow().getDoesLogSystemWork();
+        this.isOption2 = this.settingsController.getSettingsWindow().getOption2();
+        this.isOption3 = this.settingsController.getSettingsWindow().getOption3();
+        this.isOption4 = this.settingsController.getSettingsWindow().getOption4();
+//        this.isOption5 = this.settingsController.getSettingsWindow().getOption5();
     }
 
     @Override //fixme delete debug
     public String toString()
     {
         return "SettingsModel{" +
-                "settingsController=" + settingsController +
-                ", settingsFileContent='" + settingsFileContent + '\'' +
                 ", doesLogSystemWork=" + doesLogSystemWork +
                 ", isOption2=" + isOption2 +
                 ", isOption3=" + isOption3 +
@@ -86,15 +115,30 @@ public class SettingsModel
                 '}';
     }
 
-    //Setters
-    public void setDoesLogSystemWork(boolean doesLogSystemWork)
-    {
-        this.doesLogSystemWork = doesLogSystemWork;
-    }
-
     //Getters
-    public boolean DoesLogSystemWork()
+    public boolean doesLogSystemWork()
     {
         return this.doesLogSystemWork;
     }
+
+    public boolean isOption2()
+    {
+        return this.isOption2;
+    }
+
+    public boolean isOption3()
+    {
+        return this.isOption3;
+    }
+
+    public boolean isOption4()
+    {
+        return this.isOption4;
+    }
+
+    //Todo add options here
+//    public boolean isOption5()
+//    {
+//        return this.isOption5;
+//    }
 }

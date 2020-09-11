@@ -3,6 +3,7 @@ package view.launch;
 import autilities.SnideThemes;
 import autilities.SnideUtils;
 import controller.MainController;
+import controller.editor.EditorController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
@@ -10,22 +11,22 @@ import javafx.scene.layout.VBox;
 
 public class LaunchWindow
 {
-    private MainController mainController;
+    private EditorController editorController;
 
     private Pane root;
     private Scene launchScene;
 
-    public LaunchWindow(MainController mainController)
+    public LaunchWindow(EditorController editorController)
     {
         //Assign
-        this.mainController = mainController;
+        this.editorController = editorController;
         this.root = createRootPane();
         this.launchScene = new Scene(root);
 
         //Stage properties
-        this.mainController.getMainStage().setResizable(false);
-        this.mainController.getMainStage().setWidth(400);
-        this.mainController.getMainStage().setHeight(600);
+        this.editorController.getMainController().getMainStage().setResizable(false);
+        this.editorController.getMainController().getMainStage().setWidth(400);
+        this.editorController.getMainController().getMainStage().setHeight(600);
     }
 
     private Pane createRootPane()
@@ -39,17 +40,17 @@ public class LaunchWindow
         Button exitButton = new Button("Exit");
 
         //Buttons configuration
-        createButton.setOnAction(event -> this.mainController.openEditorWindowWithNewFile());
+        createButton.setOnAction(event -> this.editorController.getMainController().openEditorWindowWithNewFile());
 
         openButton.setOnAction(e ->
         {
-            this.mainController.openFileChooserAndAddChosenFilesToEditor();
-            this.mainController.openEditorWindow();
+            this.editorController.getMainController().openFileChooserAndAddChosenFilesToEditor();
+            this.editorController.getMainController().openEditorWindow();
         }); //TODO
 
-        settingsButton.setOnAction(e -> this.mainController.openSettingsWindow());
+        settingsButton.setOnAction(e -> this.editorController.getMainController().openSettingsWindow());
 
-        gitHubButton.setOnAction(e -> this.mainController.openGitHubInBrowser());
+        gitHubButton.setOnAction(e -> this.editorController.getMainController().openGitHubInBrowser());
 
         exitButton.setOnAction(e -> SnideUtils.stopProgram());
 

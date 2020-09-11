@@ -1,7 +1,9 @@
 package controller;
 
 import autilities.*;
+import com.sun.scenario.Settings;
 import controller.editor.EditorController;
+import controller.settings.SettingsController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -17,9 +19,8 @@ import java.util.List;
 public class MainController extends Application
 {
     private EditorController editorController;
+    private SettingsController settingsController;
 
-    private LaunchWindow launchWindow;
-    private SettingsWindow settingsWindow;
     private ThreadManager threadManager;
 
     private Stage mainStage;
@@ -45,10 +46,10 @@ public class MainController extends Application
 
         //Editor
         this.editorController = new EditorController(this);
+        this.settingsController = new SettingsController(this);
 
-        this.launchWindow = new LaunchWindow(this);
-        this.settingsWindow = new SettingsWindow(this);
         this.threadManager = new ThreadManager(this);
+
         this.windowHist = new ElementsTicker<>(WindowType.values().length);
 
         //Stage configuration
@@ -74,7 +75,7 @@ public class MainController extends Application
         this.mainStage.setWidth(400);
         this.mainStage.setHeight(600);
 
-        this.mainStage.setScene(launchWindow.getConfiguredLaunchScene());
+        this.mainStage.setScene(this.editorController.getLaunchWindow().getConfiguredLaunchScene());
         this.mainStage.show();
     }
 
@@ -102,7 +103,7 @@ public class MainController extends Application
         this.mainStage.setWidth(400);
         this.mainStage.setHeight(600);
 
-        this.mainStage.setScene(settingsWindow.getConfiguredSettingsScene());
+        this.mainStage.setScene(this.settingsController.getSettingsWindow().getConfiguredSettingsScene());
         this.mainStage.show();
     }
 

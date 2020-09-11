@@ -3,6 +3,7 @@ package view.settings;
 import autilities.SnideThemes;
 import autilities.WindowType;
 import controller.MainController;
+import controller.settings.SettingsController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
@@ -11,7 +12,7 @@ import javafx.scene.layout.VBox;
 
 public class SettingsWindow
 {
-    private MainController mainController;
+    private SettingsController settingsController;
 
     //Scene elements
     private Scene settingsScene;
@@ -23,9 +24,9 @@ public class SettingsWindow
     private OptionHBox option3;
     private OptionHBox option4;
 
-    public SettingsWindow(MainController mainController)
+    public SettingsWindow(SettingsController settingsController)
     {
-        this.mainController = mainController;
+        this.settingsController = settingsController;
 
         this.root = createRootPane();
         this.settingsScene = new Scene(this.root);
@@ -67,18 +68,18 @@ public class SettingsWindow
         Button backButton = new Button("Back");
 
         //Configuration
-        saveButton.setOnAction(e -> System.out.println("Not implemented")); //TODO
+        saveButton.setOnAction(e -> this.settingsController.saveSettings()); //TODO
 
         backButton.setOnAction(
                 e ->
                 {
-                    if (this.mainController.getPreviousWindowType() == WindowType.LAUNCH_WINDOW)
+                    if (this.settingsController.getMainController().getPreviousWindowType() == WindowType.LAUNCH_WINDOW)
                     {
-                        this.mainController.openLaunchWindow();
+                        this.settingsController.getMainController().openLaunchWindow();
                     }
-                    else if (this.mainController.getPreviousWindowType() == WindowType.EDITOR_WINDOW)
+                    else if (this.settingsController.getMainController().getPreviousWindowType() == WindowType.EDITOR_WINDOW)
                     {
-                        this.mainController.openEditorWindow();
+                        this.settingsController.getMainController().openEditorWindow();
                     }
                 }
         );
@@ -93,6 +94,16 @@ public class SettingsWindow
     public Scene getConfiguredSettingsScene()
     {
         return this.settingsScene;
+    }
+
+    public void updateOptionsFromModel()
+    {
+        //Todo add options here
+        this.doesLogSystemWork.setSelected(this.settingsController.getSettingsModel().doesLogSystemWork());
+        this.option2.setSelected(this.settingsController.getSettingsModel().isOption2());
+        this.option3.setSelected(this.settingsController.getSettingsModel().isOption3());
+        this.option4.setSelected(this.settingsController.getSettingsModel().isOption4());
+//        this.option5.setSelected(this.settingsController.getSettingsModel().isOption5());
     }
 
     //Getters

@@ -1,4 +1,7 @@
-1. Refactor refreshing thread inside EditorModel -- done;
-2. Refactor internal thread inside EditorTab -- declined;
-3. Add exceptions in Log system -- done;
-4. Implement settings -- wip;
+1. Refactor refreshing thread inside EditorModel -> done;
+2. Refactor internal thread inside EditorTab -> declined;
+3. Add exceptions in Log system -> done;
+4. Implement settings -> done;
+5. Refactor LaunchWindow and EditorController -> done;
+6. Make global code rafactoring before SNIDE 1.0 -> not started;
+7. Rework consts (Make fields not final and implement getters) -> not started;

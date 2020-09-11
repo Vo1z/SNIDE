@@ -31,4 +31,9 @@ public class OptionHBox extends HBox
     {
         return checkBox.isSelected();
     }
+
+    public void setSelected(boolean isChecked)
+    {
+        this.checkBox.setSelected(isChecked);
+    }
 }

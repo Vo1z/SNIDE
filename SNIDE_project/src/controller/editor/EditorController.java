@@ -4,25 +4,22 @@ import controller.MainController;
 import model.editor.EditorModel;
 import model.editor.EditorTab;
 import view.editor.EditorWindow;
+import view.launch.LaunchWindow;
 
 import java.io.File;
 
 public class EditorController
 {
     private MainController mainController;
+    private LaunchWindow launchWindow;
     private EditorWindow editorWindow;
     private EditorModel editorModel;
 
-    public EditorController(MainController mainController, EditorWindow editorWindow, EditorModel editorModel)
-    {
-        this.mainController = mainController;
-        this.editorWindow = editorWindow;
-        this.editorModel = editorModel;
-    }
 
     public EditorController(MainController mainController)
     {
         this.mainController = mainController;
+        this.launchWindow = new LaunchWindow(this);
         this.editorWindow = new EditorWindow(this);
         this.editorModel = new EditorModel(this);
     }
@@ -46,6 +43,11 @@ public class EditorController
     }
 
     //Getters
+    public LaunchWindow getLaunchWindow()
+    {
+        return this.launchWindow;
+    }
+
     public EditorModel getEditorModel()
     {
         return editorModel;
