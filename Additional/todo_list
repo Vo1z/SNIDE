@@ -5,3 +5,4 @@
 5. Refactor LaunchWindow and EditorController -> done;
 6. Make global code rafactoring before SNIDE 1.0 -> not started;
 7. Rework consts (Make fields not final and implement getters) -> not started;
+8. Add css file for SmartView mode in EditorWindow -> not started;

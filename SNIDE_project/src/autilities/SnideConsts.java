@@ -15,6 +15,14 @@ public class SnideConsts
     public final static double DEFAULT_WINDOW_WIDTH = Screen.getPrimary().getVisualBounds().getWidth();
     public final static double DEFAULT_WINDOW_HEIGHT = Screen.getPrimary().getVisualBounds().getHeight();
 
+    //Editor
+    public static final double SMART_MODE_EDITOR_WINDOW_WIDTH = 600;
+    public static final double SMART_MODE_EDITOR_WINDOW_HEIGHT = 800;
+
+    //Settings
+    public static final double SETTINGS_WINDOW_WIDTH = 400;
+    public static final double SETTINGS_WINDOW_HEIGHT = 600;
+
     //File chooser
     public final static FileChooser.ExtensionFilter FILES_POOL_EXTENSION = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");//FIXME
 }

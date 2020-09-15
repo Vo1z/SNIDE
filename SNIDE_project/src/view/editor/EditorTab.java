@@ -1,4 +1,4 @@
-package model.editor;
+package view.editor;
 
 import autilities.SnideUtils;
 import controller.editor.EditorController;
@@ -68,6 +68,7 @@ public class EditorTab extends Tab
         root.add(tabTextArea, 0, 0, 9 , 10);
         root.add(caretPositionInformationLabel, 0, 10, 1, 10);
         root.add(fileSizeInformationLabel, 2, 10, 1, 10);
+        root.add(new Label(""), 10, 0, 1, 1);
 
         return root;
     }

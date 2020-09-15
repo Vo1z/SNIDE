@@ -2,5 +2,11 @@ package autilities;
 
 public enum WindowType
 {
-    SETTINGS_WINDOW, LAUNCH_WINDOW, EDITOR_WINDOW
+    //Settings
+    SETTINGS_WINDOW,
+
+    //Editor
+    LAUNCH_WINDOW,
+    COMPLETE_EDITOR_WINDOW,
+    SMART_EDITOR_WINDOW
 }

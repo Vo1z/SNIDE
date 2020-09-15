@@ -2,7 +2,6 @@ package view.settings;
 
 import autilities.SnideThemes;
 import autilities.WindowType;
-import controller.MainController;
 import controller.settings.SettingsController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -77,9 +76,13 @@ public class SettingsWindow
                     {
                         this.settingsController.getMainController().openLaunchWindow();
                     }
-                    else if (this.settingsController.getMainController().getPreviousWindowType() == WindowType.EDITOR_WINDOW)
+                    else if (this.settingsController.getMainController().getPreviousWindowType() == WindowType.COMPLETE_EDITOR_WINDOW)
                     {
-                        this.settingsController.getMainController().openEditorWindow();
+                        this.settingsController.getMainController().openCompleteEditorWindow();
+                    }
+                    else if (this.settingsController.getMainController().getPreviousWindowType() == WindowType.SMART_EDITOR_WINDOW)
+                    {
+                        this.settingsController.getMainController().openSmartEditorWindow();
                     }
                 }
         );

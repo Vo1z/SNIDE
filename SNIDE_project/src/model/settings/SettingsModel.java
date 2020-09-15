@@ -16,10 +16,10 @@ public class SettingsModel
     private String settingsFileContent;
 
     //Todo add options here
-    private boolean doesLogSystemWork;
-    private boolean isOption2;
-    private boolean isOption3;
-    private boolean isOption4;
+    private static boolean doesLogSystemWork;
+    private static boolean isOption2;
+    private static boolean isOption3;
+    private static boolean isOption4;
     //private boolean isOption5;
 
     public SettingsModel(SettingsController settingsController)
@@ -34,7 +34,7 @@ public class SettingsModel
     {
         this.settingsFileContent = SnideUtils.getFileContent(new File(SnideConsts.SETTINGS_FILE_PATH));
 
-        if (settingsFileContent != null && settingsFileContent.length() > 0 )
+        if (settingsFileContent != null && this.settingsFileContent.length() > 0 )
         {
             //Todo add options here
             Pattern pattern;
@@ -116,29 +116,29 @@ public class SettingsModel
     }
 
     //Getters
-    public boolean doesLogSystemWork()
+    public static boolean doesLogSystemWork()
     {
-        return this.doesLogSystemWork;
+        return doesLogSystemWork;
     }
 
-    public boolean isOption2()
+    public static boolean isOption2()
     {
-        return this.isOption2;
+        return isOption2;
     }
 
-    public boolean isOption3()
+    public static boolean isOption3()
     {
-        return this.isOption3;
+        return isOption3;
     }
 
-    public boolean isOption4()
+    public static boolean isOption4()
     {
-        return this.isOption4;
+        return isOption4;
     }
 
     //Todo add options here
-//    public boolean isOption5()
+//    public static  boolean isOption5()
 //    {
-//        return this.isOption5;
+//        return isOption5;
 //    }
 }

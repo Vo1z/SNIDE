@@ -1,5 +1,7 @@
 package log_lib;
 
+import model.settings.SettingsModel;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -12,44 +14,50 @@ public class LogsStorage
 
     public static void addLog(LogUnit logUnit)
     {
-        logs.add(logUnit);
+        if (SettingsModel.doesLogSystemWork())
+            logs.add(logUnit);
     }
 
     public static void removeLog(LogUnit logUnit)
     {
-        logs.remove(logUnit);
+        if (SettingsModel.doesLogSystemWork())
+            logs.remove(logUnit);
     }
 
     public static void removeLog(int index)
     {
-        logs.remove(index);
+        if (SettingsModel.doesLogSystemWork())
+            logs.remove(index);
     }
 
     public static void createLogFiles(String path)
     {
-        try
+        if (SettingsModel.doesLogSystemWork())
         {
-            File fileWithLogs = new File(path);
-
-            if(fileWithLogs.createNewFile()) //If file created
+            try
             {
-                FileWriter fileWriter = new FileWriter(fileWithLogs);
-                BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+                File fileWithLogs = new File(path);
 
-                bufferedWriter.write(getAllLogsInString());
+                if (fileWithLogs.createNewFile()) //If file created
+                {
+                    FileWriter fileWriter = new FileWriter(fileWithLogs);
+                    BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-                bufferedWriter.close();
-                fileWriter.close();
+                    bufferedWriter.write(getAllLogsInString());
+
+                    bufferedWriter.close();
+                    fileWriter.close();
+                }
+                else
+                {
+                    fileWithLogs.delete();
+                    createLogFiles(path);
+                }
             }
-            else
+            catch (IOException ioException)
             {
-                fileWithLogs.delete();
-                createLogFiles(path);
+                ioException.printStackTrace();
             }
-        }
-        catch (IOException ioException)
-        {
-            ioException.printStackTrace();
         }
     }
 

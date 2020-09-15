@@ -4,6 +4,7 @@ import autilities.SnideUtils;
 import controller.editor.EditorController;
 import javafx.application.Platform;
 import javafx.scene.control.Tab;
+import view.editor.EditorTab;
 
 import java.util.ArrayList;
 

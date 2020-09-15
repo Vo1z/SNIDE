@@ -2,7 +2,7 @@ package controller.editor;
 
 import controller.MainController;
 import model.editor.EditorModel;
-import model.editor.EditorTab;
+import view.editor.EditorTab;
 import view.editor.EditorWindow;
 import view.launch.LaunchWindow;
 

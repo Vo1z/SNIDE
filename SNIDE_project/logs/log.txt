@@ -1,12 +1,6 @@
 LOG #1.0
-Type:NOTIFICATION
-Invocation time 31/08/2020 17:09:36
-Description: NONE
-Invocation place: [ Class name: EditorTab | Package name: model ]
-
-LOG #2.0
-Type:NOTIFICATION
-Invocation time 31/08/2020 17:09:37
-Description: NONE
-Invocation place: [ Class name: EditorTab | Package name: model ]
+Type:EVENT
+Invocation time 16/09/2020 00:04:40
+Description: stopProgram
+Invocation place: SnideUtils
 

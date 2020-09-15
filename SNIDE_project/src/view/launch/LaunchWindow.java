@@ -2,7 +2,6 @@ package view.launch;
 
 import autilities.SnideThemes;
 import autilities.SnideUtils;
-import controller.MainController;
 import controller.editor.EditorController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -45,7 +44,7 @@ public class LaunchWindow
         openButton.setOnAction(e ->
         {
             this.editorController.getMainController().openFileChooserAndAddChosenFilesToEditor();
-            this.editorController.getMainController().openEditorWindow();
+            this.editorController.getMainController().openCompleteEditorWindow();
         }); //TODO
 
         settingsButton.setOnAction(e -> this.editorController.getMainController().openSettingsWindow());

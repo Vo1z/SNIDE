@@ -1,16 +1,14 @@
 package controller;
 
 import autilities.*;
-import com.sun.scenario.Settings;
 import controller.editor.EditorController;
 import controller.settings.SettingsController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import log_lib.LogType;
 import log_lib.LogUnit;
 import log_lib.LogsStorage;
-import view.launch.LaunchWindow;
-import view.settings.SettingsWindow;
 
 import java.io.File;
 import java.io.IOException;
@@ -63,6 +61,11 @@ public class MainController extends Application
     public void stop() throws Exception
     {
         System.out.println("On stop"); //fixme debug
+
+        //Fixme log
+        LogsStorage.addLog(new LogUnit(LogType.EVENT, "stopProgram", "MainController"));
+
+        LogsStorage.createLogFiles(SnideConsts.LOG_FILE_PATH);
     }
 
     public void openLaunchWindow()
@@ -79,17 +82,31 @@ public class MainController extends Application
         this.mainStage.show();
     }
 
-    public void openEditorWindow()
+    public void openCompleteEditorWindow()
     {
-        this.windowHist.push(WindowType.EDITOR_WINDOW);
+        this.windowHist.push(WindowType.COMPLETE_EDITOR_WINDOW);
         this.mainStage.hide();
 
         this.mainStage.setResizable(true);
+        this.mainStage.setMaximized(true);
         //this.mainStage.setHeight(Consts.DEFAULT_WINDOW_HEIGHT);
         //this.mainStage.setWidth(Consts.DEFAULT_WINDOW_WIDTH);
-        this.mainStage.setMaximized(true);
 
-        this.mainStage.setScene(this.editorController.getEditorWindow().getConfiguredEditorScene());
+        this.mainStage.setScene(this.editorController.getEditorWindow().getCompleteEditorScene());
+        this.mainStage.show();
+    }
+
+    public void openSmartEditorWindow()
+    {
+        this.windowHist.push(WindowType.SMART_EDITOR_WINDOW);
+        this.mainStage.hide();
+
+        this.mainStage.setResizable(true);
+        this.mainStage.setMaximized(false);
+        this.mainStage.setWidth(SnideConsts.SMART_MODE_EDITOR_WINDOW_WIDTH);
+        this.mainStage.setHeight(SnideConsts.SMART_MODE_EDITOR_WINDOW_HEIGHT);
+
+        this.mainStage.setScene(this.editorController.getEditorWindow().getSmartEditorScene());
         this.mainStage.show();
     }
 
@@ -100,8 +117,8 @@ public class MainController extends Application
 
         this.mainStage.setResizable(false);
         this.mainStage.setMaximized(false);
-        this.mainStage.setWidth(400);
-        this.mainStage.setHeight(600);
+        this.mainStage.setWidth(SnideConsts.SETTINGS_WINDOW_WIDTH);
+        this.mainStage.setHeight(SnideConsts.SETTINGS_WINDOW_HEIGHT);
 
         this.mainStage.setScene(this.settingsController.getSettingsWindow().getConfiguredSettingsScene());
         this.mainStage.show();
@@ -123,7 +140,7 @@ public class MainController extends Application
 
     public void openEditorWindowWithNewFile()
     {
-        this.openEditorWindow();
+        this.openCompleteEditorWindow();
         this.editorController.createNewFile();
     }
 
@@ -131,14 +148,13 @@ public class MainController extends Application
     {
         List<File> chosenFiles = SnideUtils.getFilesFromFileChooser(this.mainStage);
 
-        if(chosenFiles != null)
+        if (chosenFiles != null)
         {
-            chosenFiles.stream().forEach( file -> this.editorController.addFileToEditor(file) );
+            chosenFiles.stream().forEach(file -> this.editorController.addFileToEditor(file));
         }
     }
 
     //Getters
-
     public Scene getCurrentScene()
 
     {
@@ -152,7 +168,7 @@ public class MainController extends Application
 
     public EditorController getEditorController()
     {
-        return  this.editorController;
+        return this.editorController;
     }
 
     public Object getPreviousWindowType()
@@ -175,7 +191,7 @@ public class MainController extends Application
         }
         else
         {
-            return  null;
+            return null;
         }
     }
 }
