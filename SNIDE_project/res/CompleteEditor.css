@@ -1,0 +1,174 @@
+/*Layouts properties*/
+.root
+{
+    -fx-spacing: 5px;
+    -fx-pref-height: 10000px;
+    -fx-pref-width: 10000px;
+
+    -fx-text-fill: lightgray;
+
+    -fx-background-color: #282831;
+}
+
+.label
+{
+    -fx-text-fill: lightgray;
+}
+
+VBox
+{
+    -fx-spacing: 5px;
+    -fx-padding: 5px;
+}
+
+GridPane
+{
+    -fx-pref-width: 1000000px;
+    -fx-pref-height: 100000000px;
+
+    -fx-hgap: 10px;
+}
+
+/*Tab properties*/
+.tab-header-background
+{
+    -fx-background-color: #282831;
+}
+
+.tab-header-area
+{
+    -fx-padding: 0 0 0 -5;
+}
+
+.tab
+{
+    -fx-background-radius: 0,0;
+    -fx-padding: 0 5 0 10;
+    -fx-font-size: 12pt;
+    -fx-background-color: darkgray;
+}
+
+.tab-pane
+{
+    -fx-padding: 0 -1 -1 -1;
+}
+
+/*Button properties*/
+.button
+{
+    -fx-alignment: center;
+
+    -fx-background-radius: 99,0;
+    -fx-background-color: darkgray;
+    -fx-min-height: 20px;
+    -fx-min-width: 90px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 12pt;
+}
+
+.button:pressed
+{
+    -fx-background-radius: 99,0;
+    -fx-background-color: coral;
+    -fx-min-height: 20px;
+    -fx-min-width: 90px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 12pt;
+}
+
+.button:hover
+{
+    -fx-background-radius: 99,0;
+    -fx-background-color: lightgray;
+    -fx-min-height: 20px;
+    -fx-min-width: 90px;
+
+    -fx-font-family: Cuprum;
+    -fx-font-size: 12pt;
+}
+
+
+/*Text area properties*/
+.text-area
+{
+    -fx-pref-width: 1000000px;
+    -fx-pref-height: 100000000px;
+
+    -fx-control-inner-background: #3f3a42;
+    -fx-border-color: gray;
+    -fx-border-width: 2px;
+
+    -fx-font-family: "Cuprum";
+    -fx-font-size: 16px;
+
+    -fx-effect: null;
+}
+
+.text-area:hover
+{
+    -fx-pref-width: 10000px;
+    -fx-pref-height: 100000000px;
+
+    -fx-control-inner-background: #3f3a42;
+    -fx-border-color: gray;
+    -fx-border-width: 2px;
+
+    -fx-effect: null;
+}
+
+.text-area:focused
+{
+    -fx-pref-width: 10000px;
+    -fx-pref-height: 100000000px;
+
+    -fx-control-inner-background: #3f3a42;
+    -fx-border-color: gray;
+    -fx-border-width: 2px;
+
+    -fx-effect: null;
+}
+
+.text-area .text
+{
+    -fx-line-spacing: 0px;
+    -fx-font-size: 16px;
+}
+
+
+/*TextFlow properties*/
+.list-view
+{
+    -fx-pref-width: 50px;
+    -fx-background-color: #282831;
+    -fx-padding: 8px, 0, 0, 0;
+}
+
+.list-view .list-cell:selected
+{
+    -fx-text-fill: lightgray;
+    -fx-background-color: #282831;
+}
+
+.list-view .list-cell
+{
+    -fx-text-fill: lightgray;
+    -fx-pref-width: 50px;
+    -fx-font-family: "Cuprum";
+    -fx-font-size: 16px;
+    -fx-effect: null;
+    -fx-background-color: #282831;
+    -fx-padding: 0px;
+}
+
+/*Removes scrollbars*/
+.list-view .scroll-bar:vertical
+{
+    -fx-scale-x: 0;
+}
+
+.list-view .scroll-bar:horizontal
+{
+    -fx-scale-x: 0;
+}

@@ -1,0 +1,4 @@
+doesLogSystemWork = true
+isOption2 = false
+isOption3 = false
+isOption4 = false
