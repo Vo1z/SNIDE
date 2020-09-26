@@ -1,6 +1,6 @@
 LOG #1.0
 Type:EVENT
-Invocation time 16/09/2020 00:04:40
+Invocation time 26/09/2020 23:05:36
 Description: stopProgram
 Invocation place: SnideUtils
 

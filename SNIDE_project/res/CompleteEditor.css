@@ -5,7 +5,14 @@
     -fx-pref-height: 10000px;
     -fx-pref-width: 10000px;
 
-    -fx-background-color: wheat;
+    -fx-text-fill: lightgray;
+
+    -fx-background-color: #282831;
+}
+
+.label
+{
+    -fx-text-fill: lightgray;
 }
 
 VBox
@@ -25,7 +32,7 @@ GridPane
 /*Tab properties*/
 .tab-header-background
 {
-    -fx-background-color: wheat;
+    -fx-background-color: #282831;
 }
 
 .tab-header-area
@@ -89,7 +96,7 @@ GridPane
     -fx-pref-width: 1000000px;
     -fx-pref-height: 100000000px;
 
-    -fx-control-inner-background: #e2d1b9;
+    -fx-control-inner-background: #3f3a42;
     -fx-border-color: gray;
     -fx-border-width: 2px;
 
@@ -104,7 +111,7 @@ GridPane
     -fx-pref-width: 10000px;
     -fx-pref-height: 100000000px;
 
-    -fx-control-inner-background: #e2d1b9;
+    -fx-control-inner-background: #3f3a42;
     -fx-border-color: gray;
     -fx-border-width: 2px;
 
@@ -116,7 +123,7 @@ GridPane
     -fx-pref-width: 10000px;
     -fx-pref-height: 100000000px;
 
-    -fx-control-inner-background: #e2d1b9;
+    -fx-control-inner-background: #3f3a42;
     -fx-border-color: gray;
     -fx-border-width: 2px;
 
@@ -134,24 +141,24 @@ GridPane
 .list-view
 {
     -fx-pref-width: 50px;
-    -fx-background-color: wheat;
+    -fx-background-color: #282831;
     -fx-padding: 8px, 0, 0, 0;
 }
 
 .list-view .list-cell:selected
 {
-    -fx-text-fill: black;
-    -fx-background-color: wheat;
+    -fx-text-fill: lightgray;
+    -fx-background-color: #282831;
 }
 
 .list-view .list-cell
 {
-    -fx-text-fill: black;
+    -fx-text-fill: lightgray;
     -fx-pref-width: 50px;
     -fx-font-family: "Cuprum";
     -fx-font-size: 16px;
     -fx-effect: null;
-    -fx-background-color: wheat;
+    -fx-background-color: #282831;
     -fx-padding: 0px;
 }
 

@@ -71,7 +71,7 @@ public class EditorWindow
         Button newFileButton = new Button("New");
         Button openButton = new Button("Open");
         Button saveButton = new Button("Save");
-        Button enterSmartModeButton = new Button("Smart");
+        //Button enterSmartModeButton = new Button("Smart");
         Button settingsButton = new Button("Settings");
         Button exitButton = new Button("Exit");
 
@@ -82,7 +82,7 @@ public class EditorWindow
 
         saveButton.setOnAction(e -> this.editorController.getEditorModel().saveFile(this.tabPanel.getSelectionModel().getSelectedIndex()));
 
-        enterSmartModeButton.setOnAction(e -> this.editorController.getMainController().openSmartEditorWindow());
+        //enterSmartModeButton.setOnAction(e -> this.editorController.getMainController().openSmartEditorWindow());
 
         settingsButton.setOnAction(e -> this.editorController.getMainController().openSettingsWindow());
 
@@ -92,7 +92,7 @@ public class EditorWindow
         controlPanel.getChildren().add(newFileButton);
         controlPanel.getChildren().add(openButton);
         controlPanel.getChildren().add(saveButton);
-        controlPanel.getChildren().add(enterSmartModeButton);
+        //controlPanel.getChildren().add(enterSmartModeButton);
         controlPanel.getChildren().add(settingsButton);
         controlPanel.getChildren().add(exitButton);
 

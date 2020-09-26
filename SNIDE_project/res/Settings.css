@@ -1,6 +1,6 @@
 .root
 {
-    -fx-background-color: wheat;
+    -fx-background-color: #282831;
     -fx-spacing: 20px;
 }
 
@@ -21,6 +21,11 @@ OptionHBox
     -fx-spacing: 100px;
     -fx-font-family: Cuprum;
 }
+.label
+{
+    -fx-text-fill: lightgray;
+}
+
 
 .button
 {
