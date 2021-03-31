@@ -1,7 +1,7 @@
 package model.settings;
 
-import autilities.SnideConsts;
-import autilities.SnideUtils;
+import snideUtilities.SnideConsts;
+import snideUtilities.SnideUtils;
 import controller.settings.SettingsController;
 
 import java.io.File;

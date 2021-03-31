@@ -1,6 +1,6 @@
 package controller.settings;
 
-import autilities.SnideConsts;
+import snideUtilities.SnideConsts;
 import controller.MainController;
 import model.settings.SettingsModel;
 import view.settings.SettingsWindow;

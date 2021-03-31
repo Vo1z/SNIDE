@@ -1,4 +1,4 @@
-package autilities;
+package snideUtilities;
 
 public enum WindowType
 {

@@ -1,7 +1,7 @@
 package view.launch;
 
-import autilities.SnideThemes;
-import autilities.SnideUtils;
+import snideUtilities.SnideThemes;
+import snideUtilities.SnideUtils;
 import controller.editor.EditorController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

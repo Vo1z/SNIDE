@@ -1,6 +1,6 @@
 package controller;
 
-import autilities.*;
+import snideUtilities.*;
 import controller.editor.EditorController;
 import controller.settings.SettingsController;
 import javafx.application.Application;

@@ -1,4 +1,4 @@
-package autilities;
+package snideUtilities;
 
 import controller.MainController;
 import model.editor.EditorModel;

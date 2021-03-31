@@ -1,6 +1,6 @@
 package log_lib;
 
-import autilities.SnideUtils;
+import snideUtilities.SnideUtils;
 
 public class LogUnit
 {

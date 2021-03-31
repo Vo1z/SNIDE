@@ -1,7 +1,7 @@
 package view.settings;
 
-import autilities.SnideThemes;
-import autilities.WindowType;
+import snideUtilities.SnideThemes;
+import snideUtilities.WindowType;
 import controller.settings.SettingsController;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -53,6 +53,11 @@ public class SettingsWindow
         this.option2 = new OptionHBox("Option 2");
         this.option3 = new OptionHBox("Option 3");
         this.option4 = new OptionHBox("Option 4");
+
+        this.option2.setVisible(false);
+        this.option3.setVisible(false);
+        this.option4.setVisible(false);
+
 
         //Adding elements to pane
         options.getChildren().addAll(doesLogSystemWork, option2, option3, option4);

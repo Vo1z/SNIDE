@@ -1,4 +1,4 @@
-package autilities;
+package snideUtilities;
 
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
